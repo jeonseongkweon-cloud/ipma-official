@@ -2,14 +2,25 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>IPMA | International Police Martial Arts Alliance</title>
-  <meta name="description" content="IPMA 공식 포털 - 호신술,교차원리 기반 무기술" />
+  <meta name="description" content="IPMA 공식 포털 - 구조 >> 교차원리, 교차원리 기반 무도" />
   <link rel="stylesheet" href="./assets/css/style.css" />
   <link rel="icon" href="https://static.wixstatic.com/media/abf917_77f3c11d34c64c9eb18c4da00cfad109~mv2.jpg" />
+
+  <!-- OG (공유 미리보기) -->
+  <meta property="og:title" content="IPMA | Official Portal" />
+  <meta property="og:description" content="구조 >> 교차원리, 교차원리 기반 무도" />
+  <meta property="og:image" content="https://static.wixstatic.com/media/abf917_77f3c11d34c64c9eb18c4da00cfad109~mv2.jpg" />
 </head>
 
 <body>
+  <!-- BG FX -->
+  <div class="bg-orbs" aria-hidden="true">
+    <span class="orb o1"></span>
+    <span class="orb o2"></span>
+    <span class="orb o3"></span>
+  </div>
 
   <!-- HEADER -->
   <header class="site-header">
@@ -25,7 +36,8 @@
       </a>
 
       <button class="menu-btn" data-menu-btn aria-controls="site-nav" aria-expanded="false" title="메뉴">
-        ☰
+        <span class="menu-ico" aria-hidden="true">☰</span>
+        <span class="sr-only">메뉴</span>
       </button>
 
       <nav class="nav" id="site-nav" data-site-nav aria-label="IPMA Navigation">
@@ -41,222 +53,221 @@
     </div>
   </header>
 
-  <!-- HERO -->
+  <!-- HERO SLIDER (우→좌 자동, 3초, dots, 가운데 강조 없음) -->
   <section class="hero">
-    <div class="container hero-grid">
+    <div class="container">
 
-      <div class="hero-card">
-        <div class="kicker">International Police Martial Arts Association</div>
-        <h1>IPMA 공식 포털</h1>
-        <p class="muted">
-          프로그램, 인증 조회, 자료실, 갤러리&영상, 협력기관 정보를 한 곳에서 확인하세요.
-        </p>
+      <div class="hero-top">
+        <div class="hero-copy">
+          <div class="kicker">International Police Martial Arts Alliance</div>
+          <h1>IPMA 공식 포털</h1>
+          <p class="muted">
+            프로그램 · 인증 조회 · 자료 · 갤러리 · 협력기관 정보를 한 곳에서 확인하세요.
+          </p>
 
-        <div class="hero-quote">
-          구조 &gt;&gt; 교차원리, 교차원리 기반 무도
+          <div class="hero-quote">
+            구조 &gt;&gt; 교차원리, 교차원리 기반 무도
+          </div>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="./programs/">프로그램 보기</a>
+            <a class="btn blue" href="./verification/">조회서비스</a>
+            <a class="btn ghost" href="./contact/">신청&문의</a>
+          </div>
+
+          <div class="mini-links">
+            <a class="chip" href="https://open.kakao.com/o/g60Wr8hi" target="_blank" rel="noopener">카톡 오픈채팅</a>
+            <a class="chip" href="https://band.us/@ipma" target="_blank" rel="noopener">밴드</a>
+            <a class="chip" href="mailto:jeonseongkweon@gmail.com">이메일</a>
+            <a class="chip" href="tel:+8228221822">전화</a>
+          </div>
         </div>
 
-        <div class="hero-actions">
-          <a class="btn primary" href="./programs/">프로그램 보기</a>
-          <a class="btn blue" href="./verification/">조회서비스</a>
-          <a class="btn ghost" href="./contact/">신청&문의</a>
-        </div>
+        <div class="hero-slider card glass" data-slider>
+          <div class="slider-viewport">
+            <div class="slider-track" data-track>
+              <!-- ✅ 여기 이미지 추가/교체만 하면 됩니다 -->
+              <div class="slide">
+                <img src="https://static.wixstatic.com/media/abf917_edb33178d5624d73b3fff1d25a008117~mv2.png" alt="IPMA 대표 이미지 1" loading="eager" />
+              </div>
+              <div class="slide">
+                <img src="https://static.wixstatic.com/media/abf917_d9e30c2973204fe580cff31d926799c7~mv2.png" alt="IPMA 대표 이미지 2" loading="lazy" />
+              </div>
+              <div class="slide">
+                <img src="https://static.wixstatic.com/media/abf917_44379e814053433c8222b07e6b4e2bcc~mv2.png" alt="IPMA 대표 이미지 3" loading="lazy" />
+              </div>
+              <div class="slide">
+                <img src="https://static.wixstatic.com/media/abf917_14e7f3737bce47858dd4661dc6ba1da9~mv2.png" alt="IPMA 대표 이미지 4" loading="lazy" />
+              </div>
+              <div class="slide">
+                <img src="https://static.wixstatic.com/media/abf917_84f1d37f333b4af884e323a676d68120~mv2.jpg" alt="IPMA 대표 이미지 5" loading="lazy" />
+              </div>
+              <div class="slide">
+                <img src="https://static.wixstatic.com/media/abf917_3f800682df51489a902acdcbef5605ec~mv2.jpg" alt="IPMA 대표 이미지 6" loading="lazy" />
+              </div>
+            </div>
+          </div>
 
-        <div class="hr"></div>
+          <div class="slider-ui">
+            <div class="dots" data-dots aria-label="슬라이드 표시"></div>
+            <button class="ghost-btn" type="button" data-prev aria-label="이전">‹</button>
+            <button class="ghost-btn" type="button" data-next aria-label="다음">›</button>
+          </div>
 
-        <div class="badge" title="빠른 연결">
-          공식 링크 바로가기
-        </div>
-        <div class="hero-actions" style="margin-top:10px;">
-          <a class="btn gold" href="https://open.kakao.com/o/g60Wr8hi" target="_blank" rel="noopener">카톡 오픈채팅</a>
-          <a class="btn" href="https://band.us/@ipma" target="_blank" rel="noopener">밴드</a>
-          <a class="btn" href="mailto:jeonseongkweon@gmail.com">이메일</a>
-          <a class="btn" href="tel:+8228221822">전화</a>
+          <div class="slider-caption">
+            <span class="badge">대표 이미지</span>
+            <span class="muted small">3초 간격 자동 이동 · 우→좌</span>
+          </div>
         </div>
       </div>
-
-      <aside class="hero-side">
-        <h3>공지 / 안내</h3>
-        <ul class="list">
-          <li>
-            <strong>조회서비스</strong><br/>
-            <span class="muted">자격/인증 확인 및 관련 안내</span>
-          </li>
-          <li>
-            <strong>프로그램</strong><br/>
-            <span class="muted">교육 과정, 세미나, 운영 프로그램</span>
-          </li>
-          <li>
-            <strong>신청&문의</strong><br/>
-            <span class="muted">가입/제휴/행사 문의 접수</span>
-          </li>
-        </ul>
-
-        <div class="hr"></div>
-        <h3>대표 연락처</h3>
-        <div class="card" style="padding:14px; margin:0;">
-          <p><strong>이메일</strong><br/><a href="mailto:jeonseongkweon@gmail.com">jeonseongkweon@gmail.com</a></p>
-          <p style="margin-top:10px;"><strong>전화</strong><br/><a href="tel:+8228221822">+82-2-822-1822</a></p>
-        </div>
-      </aside>
 
     </div>
   </section>
 
-  <!-- QUICK LINKS -->
+  <!-- ICON MENU (첨부 화면 스타일) -->
   <section class="section">
     <div class="container">
-      <div class="card">
-        <h2>빠른 이동</h2>
-        <p class="muted">자주 쓰는 메뉴를 빠르게 열어보세요.</p>
+      <div class="section-head">
+        <h2>핵심 바로가기</h2>
+        <p class="muted">신규 방문자가 가장 많이 확인하는 정보를 빠르게 열어보세요.</p>
+      </div>
 
-        <div class="section tight quick-links">
-          <div class="grid cols-3">
-            <div class="card">
-              <a href="./programs/">
-                <div class="label">
-                  <strong>프로그램</strong>
-                  <span>교육/세미나/운영 과정</span>
-                </div>
-                <span class="chev">›</span>
-              </a>
-            </div>
+      <div class="tile-grid">
+        <a class="tile" href="./programs/">
+          <div class="tile-ico">🥋</div>
+          <div class="tile-txt">
+            <strong>프로그램 소개</strong>
+            <span>연맹/연합 과정</span>
+          </div>
+        </a>
 
-            <div class="card">
-              <a href="./verification/">
-                <div class="label">
-                  <strong>조회서비스</strong>
-                  <span>자격/인증 확인</span>
-                </div>
-                <span class="chev">›</span>
-              </a>
-            </div>
+        <a class="tile" href="./verification/">
+          <div class="tile-ico">✅</div>
+          <div class="tile-txt">
+            <strong>조회서비스</strong>
+            <span>자격/인증 확인</span>
+          </div>
+        </a>
 
-            <div class="card">
-              <a href="./resources/">
-                <div class="label">
-                  <strong>자료실</strong>
-                  <span>규정/서식/다운로드</span>
-                </div>
-                <span class="chev">›</span>
-              </a>
-            </div>
+        <a class="tile" href="./resources/">
+          <div class="tile-ico">📘</div>
+          <div class="tile-txt">
+            <strong>자료실</strong>
+            <span>규정/서식</span>
+          </div>
+        </a>
 
-            <div class="card">
-              <a href="./media/">
-                <div class="label">
-                  <strong>갤러리&영상</strong>
-                  <span>사진/영상 모음</span>
-                </div>
-                <span class="chev">›</span>
-              </a>
-            </div>
+        <a class="tile" href="./media/">
+          <div class="tile-ico">🖼️</div>
+          <div class="tile-txt">
+            <strong>갤러리&영상</strong>
+            <span>활동 기록</span>
+          </div>
+        </a>
 
-            <div class="card">
-              <a href="./partners/">
-                <div class="label">
-                  <strong>산하&협력기관</strong>
-                  <span>파트너 네트워크</span>
-                </div>
-                <span class="chev">›</span>
-              </a>
-            </div>
+        <a class="tile" href="./partners/">
+          <div class="tile-ico">🤝</div>
+          <div class="tile-txt">
+            <strong>산하&협력기관</strong>
+            <span>네트워크</span>
+          </div>
+        </a>
 
-            <div class="card">
-              <a href="./contact/">
-                <div class="label">
-                  <strong>신청&문의</strong>
-                  <span>가입/제휴/문의</span>
-                </div>
-                <span class="chev">›</span>
-              </a>
+        <a class="tile" href="./contact/">
+          <div class="tile-ico">📌</div>
+          <div class="tile-txt">
+            <strong>신청&문의</strong>
+            <span>가입/제휴</span>
+          </div>
+        </a>
+
+        <a class="tile" href="https://open.kakao.com/o/g60Wr8hi" target="_blank" rel="noopener">
+          <div class="tile-ico">💬</div>
+          <div class="tile-txt">
+            <strong>카톡 문의</strong>
+            <span>바로 상담</span>
+          </div>
+        </a>
+
+        <a class="tile" href="https://band.us/@ipma" target="_blank" rel="noopener">
+          <div class="tile-ico">🟢</div>
+          <div class="tile-txt">
+            <strong>밴드 바로가기</strong>
+            <span>공지/소통</span>
+          </div>
+        </a>
+
+        <button class="tile" type="button" data-scroll-top>
+          <div class="tile-ico">⬆️</div>
+          <div class="tile-txt">
+            <strong>맨 위로</strong>
+            <span>이동</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section class="section">
+    <div class="container">
+      <div class="card glass">
+        <div class="two-col">
+          <div>
+            <h2>공지 / 안내</h2>
+            <ul class="list">
+              <li><strong>조회서비스</strong><br/><span class="muted">자격·인증 확인 및 관련 안내</span></li>
+              <li><strong>프로그램</strong><br/><span class="muted">교육 과정, 세미나, 운영 프로그램</span></li>
+              <li><strong>신청&문의</strong><br/><span class="muted">가입·제휴·행사 문의 접수</span></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2>대표 연락처</h2>
+            <div class="contact-box">
+              <p><strong>이메일</strong><br/><a href="mailto:jeonseongkweon@gmail.com">jeonseongkweon@gmail.com</a></p>
+              <p><strong>전화</strong><br/><a href="tel:+8228221822">+82-2-822-1822</a></p>
+              <p class="muted small">업무 연결이 어려우면 카톡 오픈채팅이 가장 빠릅니다.</p>
+              <div class="row">
+                <a class="btn gold" href="https://open.kakao.com/o/g60Wr8hi" target="_blank" rel="noopener">카톡 오픈채팅</a>
+                <a class="btn" href="https://band.us/@ipma" target="_blank" rel="noopener">밴드</a>
+              </div>
             </div>
           </div>
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURED IMAGES -->
-  <section class="section">
-    <div class="container">
-      <div class="card">
-        <h2>대표 이미지</h2>
-        <p class="muted">IPMA 활동/브랜딩 이미지 일부를 미리 보기로 제공합니다.</p>
-
-        <div class="section tight">
-          <div class="grid cols-3">
-            <div class="card">
-              <img src="https://static.wixstatic.com/media/abf917_edb33178d5624d73b3fff1d25a008117~mv2.png" alt="IPMA Image 1" style="width:100%; border-radius:16px; border:1px solid rgba(255,255,255,.10);" />
-            </div>
-            <div class="card">
-              <img src="https://static.wixstatic.com/media/abf917_d9e30c2973204fe580cff31d926799c7~mv2.png" alt="IPMA Image 2" style="width:100%; border-radius:16px; border:1px solid rgba(255,255,255,.10);" />
-            </div>
-            <div class="card">
-              <img src="https://static.wixstatic.com/media/abf917_44379e814053433c8222b07e6b4e2bcc~mv2.png" alt="IPMA Image 3" style="width:100%; border-radius:16px; border:1px solid rgba(255,255,255,.10);" />
-            </div>
-            <div class="card">
-              <img src="https://static.wixstatic.com/media/abf917_14e7f3737bce47858dd4661dc6ba1da9~mv2.png" alt="IPMA Image 4" style="width:100%; border-radius:16px; border:1px solid rgba(255,255,255,.10);" />
-            </div>
-            <div class="card">
-              <img src="https://static.wixstatic.com/media/abf917_84f1d37f333b4af884e323a676d68120~mv2.jpg" alt="IPMA Image 5" style="width:100%; border-radius:16px; border:1px solid rgba(255,255,255,.10);" />
-            </div>
-            <div class="card">
-              <img src="https://static.wixstatic.com/media/abf917_3f800682df51489a902acdcbef5605ec~mv2.jpg" alt="IPMA Image 6" style="width:100%; border-radius:16px; border:1px solid rgba(255,255,255,.10);" />
-            </div>
-          </div>
-        </div>
-
         <div class="hr"></div>
-        <p class="muted">
-          더 많은 이미지는 <a href="./media/" class="btn blue" style="padding:10px 12px;">갤러리&영상</a>에서 확인하세요.
-        </p>
-      </div>
-    </div>
-  </section>
 
-  <!-- VIDEOS -->
-  <section class="section">
-    <div class="container">
-      <div class="card">
         <h2>대표 영상</h2>
         <p class="muted">YouTube 영상 2편을 대문에서 바로 재생할 수 있습니다.</p>
 
-        <div class="section tight">
-          <div class="grid cols-2">
-            <div class="card">
-              <div style="position:relative; width:100%; padding-top:56.25%; border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,.10);">
-                <iframe
-                  src="https://www.youtube.com/embed/zuwIu8hx6bM"
-                  title="IPMA Video 1"
-                  style="position:absolute; inset:0; width:100%; height:100%; border:0;"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen>
-                </iframe>
-              </div>
+        <div class="grid cols-2">
+          <div class="card">
+            <div class="ratio-16x9">
+              <iframe
+                src="https://www.youtube.com/embed/zuwIu8hx6bM"
+                title="IPMA Video 1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
             </div>
-
-            <div class="card">
-              <div style="position:relative; width:100%; padding-top:56.25%; border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,.10);">
-                <iframe
-                  src="https://www.youtube.com/embed/h5OwDySbrLE"
-                  title="IPMA Video 2"
-                  style="position:absolute; inset:0; width:100%; height:100%; border:0;"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen>
-                </iframe>
-              </div>
+          </div>
+          <div class="card">
+            <div class="ratio-16x9">
+              <iframe
+                src="https://www.youtube.com/embed/h5OwDySbrLE"
+                title="IPMA Video 2"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
             </div>
           </div>
         </div>
 
         <div class="hr"></div>
         <div class="hero-actions">
-          <a class="btn" href="./media/">갤러리&영상으로 더 보기</a>
+          <a class="btn" href="./media/">갤러리&영상 더 보기</a>
           <a class="btn ghost" href="./resources/">자료실</a>
+          <a class="btn blue" href="./verification/">조회서비스</a>
         </div>
-
       </div>
     </div>
   </section>
@@ -266,7 +277,7 @@
     <div class="container footer-inner">
       <div>
         <strong>IPMA</strong><br/>
-        <small class="muted">체계 &gt;&gt; 교차원리, 교차원리 기반 무도</small><br/>
+        <small class="muted">구조 &gt;&gt; 교차원리, 교차원리 기반 무도</small><br/>
         <small>© <span id="year"></span> IPMA. All rights reserved.</small>
       </div>
 
@@ -278,6 +289,25 @@
       </div>
     </div>
   </footer>
+
+  <!-- MOBILE STICKY BAR -->
+  <nav class="stickybar" aria-label="하단 바로가기">
+    <a class="sb-btn" href="./" aria-label="홈">
+      <span class="sb-ico">🏠</span><span class="sb-txt">홈</span>
+    </a>
+    <a class="sb-btn" href="tel:+8228221822" aria-label="전화">
+      <span class="sb-ico">📞</span><span class="sb-txt">전화</span>
+    </a>
+    <a class="sb-btn sb-main" href="https://open.kakao.com/o/g60Wr8hi" target="_blank" rel="noopener" aria-label="카톡">
+      <span class="sb-ico">💬</span><span class="sb-txt">카톡</span>
+    </a>
+    <a class="sb-btn" href="https://band.us/@ipma" target="_blank" rel="noopener" aria-label="밴드">
+      <span class="sb-ico">🟢</span><span class="sb-txt">밴드</span>
+    </a>
+    <a class="sb-btn" href="./contact/" aria-label="문의">
+      <span class="sb-ico">✉️</span><span class="sb-txt">문의</span>
+    </a>
+  </nav>
 
   <script src="./assets/js/app.js"></script>
 </body>
