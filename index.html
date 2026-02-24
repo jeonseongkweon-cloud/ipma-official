@@ -75,7 +75,6 @@
             <a class="btn ghost" href="./contact/">신청&문의</a>
           </div>
 
-          <!-- Quick chips (기존 + SNS 추가) -->
           <div class="mini-links">
             <a class="chip" href="https://open.kakao.com/o/g60Wr8hi" target="_blank" rel="noopener">카톡 오픈채팅</a>
             <a class="chip" href="https://band.us/@ipma" target="_blank" rel="noopener">밴드</a>
@@ -88,28 +87,48 @@
           </div>
         </div>
 
-        <!-- Slider: 1080x1350 세로형 대응 (contain + 배경) -->
+        <!-- Slider: 1080x1350 (4:5) 세로형 / 여백0, 왜곡0, 잘림0 목표 -->
         <div class="hero-slider card glass" data-slider>
           <div class="slider-viewport">
             <div class="slider-track" data-track>
+
+              <!-- ✅ 전총재님 제공 이미지들로 교체 (중복 1개 제거) -->
               <div class="slide tall">
-                <img src="https://static.wixstatic.com/media/abf917_edb33178d5624d73b3fff1d25a008117~mv2.png" alt="IPMA 대표 이미지 1" loading="eager" />
+                <img src="https://static.wixstatic.com/media/abf917_d810617eaab142b89b5b6260d36adc45~mv2.jpg" alt="IPMA 대표 이미지 1" loading="eager" />
               </div>
+
               <div class="slide tall">
-                <img src="https://static.wixstatic.com/media/abf917_d9e30c2973204fe580cff31d926799c7~mv2.png" alt="IPMA 대표 이미지 2" loading="lazy" />
+                <img src="https://static.wixstatic.com/media/abf917_36b5eb83879b4407b3e52983e237ad5b~mv2.jpg" alt="IPMA 대표 이미지 2" loading="lazy" />
               </div>
+
               <div class="slide tall">
-                <img src="https://static.wixstatic.com/media/abf917_44379e814053433c8222b07e6b4e2bcc~mv2.png" alt="IPMA 대표 이미지 3" loading="lazy" />
+                <img src="https://static.wixstatic.com/media/abf917_96bb9bb03bb34b53a096ce6a60820085~mv2.jpg" alt="IPMA 대표 이미지 3" loading="lazy" />
               </div>
+
               <div class="slide tall">
-                <img src="https://static.wixstatic.com/media/abf917_14e7f3737bce47858dd4661dc6ba1da9~mv2.png" alt="IPMA 대표 이미지 4" loading="lazy" />
+                <img src="https://static.wixstatic.com/media/abf917_f2c97ba1a6eb4b1c832879c21c1193ce~mv2.jpg" alt="IPMA 대표 이미지 4" loading="lazy" />
               </div>
+
               <div class="slide tall">
-                <img src="https://static.wixstatic.com/media/abf917_84f1d37f333b4af884e323a676d68120~mv2.jpg" alt="IPMA 대표 이미지 5" loading="lazy" />
+                <img src="https://static.wixstatic.com/media/abf917_a5ff8cd76e1f4505a62797afa0bb9c48~mv2.jpg" alt="IPMA 대표 이미지 5" loading="lazy" />
               </div>
+
               <div class="slide tall">
-                <img src="https://static.wixstatic.com/media/abf917_3f800682df51489a902acdcbef5605ec~mv2.jpg" alt="IPMA 대표 이미지 6" loading="lazy" />
+                <img src="https://static.wixstatic.com/media/abf917_787c04c62a5b44ae9a5b5588bac4ceb8~mv2.jpg" alt="IPMA 대표 이미지 6" loading="lazy" />
               </div>
+
+              <div class="slide tall">
+                <img src="https://static.wixstatic.com/media/abf917_e4711bc7105d4efc873b8428aa1e9957~mv2.jpg" alt="IPMA 대표 이미지 7" loading="lazy" />
+              </div>
+
+              <div class="slide tall">
+                <img src="https://static.wixstatic.com/media/abf917_92f247876ae640389716212164862ab1~mv2.jpg" alt="IPMA 대표 이미지 8" loading="lazy" />
+              </div>
+
+              <div class="slide tall">
+                <img src="https://static.wixstatic.com/media/abf917_7d28060ebe21435a98211f5f46431b60~mv2.jpg" alt="IPMA 대표 이미지 9" loading="lazy" />
+              </div>
+
             </div>
           </div>
 
@@ -202,7 +221,6 @@
           </div>
         </a>
 
-        <!-- SNS tiles -->
         <a class="tile" href="https://www.youtube.com/@globalnews24official" target="_blank" rel="noopener">
           <div class="tile-ico">▶️</div>
           <div class="tile-txt">
@@ -269,10 +287,7 @@
 
         <div class="hr"></div>
 
-        <!-- 제목 변경 -->
         <h2>갤러리&영상</h2>
-
-        <!-- 문구 숨김 (화면에는 안보임) -->
         <p class="sr-only">YouTube 영상 2편을 대문에서 바로 재생할 수 있습니다.</p>
 
         <div class="grid cols-2">
@@ -349,29 +364,26 @@
 
   <script src="./assets/js/app.js"></script>
 
-  <!-- ✅ 세로형 슬라이드(1080x1350) 전용 스타일: 기존 style.css에 넣어도 되지만,
-       지금은 "HTML만 다시" 요청이라 안전하게 여기서 보정 CSS를 추가했습니다. -->
+  <!-- ✅ 세로형 슬라이드(4:5) "여백0/왜곡0/잘림0" 세팅 -->
   <style>
-    /* 슬라이드 영역에서 세로형 포스터가 "안 잘리게" 전체 보이도록 */
     .slide.tall{
-      aspect-ratio: 4 / 5; /* 1080:1350 = 4:5 */
-      background: rgba(0,0,0,.22);
+      aspect-ratio: 4 / 5;     /* 1080:1350 */
+      background: transparent; /* 여백(배경) 자체 제거 */
     }
     .slide.tall img{
-      object-fit: contain !important; /* 핵심: 잘림 방지 */
-      background: radial-gradient(600px 260px at 50% 15%, rgba(74,163,255,.10), transparent 55%),
-                  radial-gradient(600px 260px at 50% 85%, rgba(243,194,79,.08), transparent 55%),
-                  rgba(0,0,0,.22);
-      padding: 10px; /* 여백(액자 느낌) */
+      width: 100%;
+      height: 100%;
+      object-fit: contain;     /* 왜곡0 / 잘림0 */
+      padding: 0;              /* 여백0 */
+      background: transparent; /* 이미지 바깥 배경 제거 */
+      border: 0;
+      transform: none;
+      filter: none;
     }
 
-    /* 좁은 모바일에서 슬라이더가 너무 길어지지 않게 최대 높이 제한 */
-    @media (max-width: 980px){
-      .hero-top{ grid-template-columns: 1fr !important; }
-    }
+    /* 혹시 모바일에서 너무 길어 보이면 약간 완화 */
     @media (max-width: 520px){
-      .slide.tall{ aspect-ratio: 3 / 4; } /* 모바일은 조금 덜 길게 */
-      .slide.tall img{ padding: 8px; }
+      .slide.tall{ aspect-ratio: 4 / 5; }
     }
   </style>
 </body>
