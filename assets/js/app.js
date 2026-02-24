@@ -1,78 +1,134 @@
-/* =========================================================
-   IPMA GitHub Pages - Common Script
-   File: /assets/js/app.js
-   Features:
-   1) Auto year in footer
-   2) Mobile menu toggle
-========================================================= */
+(() => {
+  // Footer year
+  const y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
 
-(function () {
-  "use strict";
-
-  // ---------- 1) Footer year auto ----------
-  // 사용법: <span id="year"></span> 또는 <span data-year></span>
-  const year = String(new Date().getFullYear());
-  const yearById = document.getElementById("year");
-  if (yearById) yearById.textContent = year;
-
-  document.querySelectorAll("[data-year]").forEach((el) => {
-    el.textContent = year;
-  });
-
-  // ---------- 2) Mobile menu toggle ----------
-  // 권장 구조:
-  // <button class="menu-btn" data-menu-btn aria-controls="site-nav" aria-expanded="false">☰</button>
-  // <nav class="nav" id="site-nav" data-site-nav> ... </nav>
+  // Mobile menu toggle
   const btn = document.querySelector("[data-menu-btn]");
-  const nav = document.querySelector("[data-site-nav]") || document.getElementById("site-nav");
-
+  const nav = document.querySelector("[data-site-nav]");
   if (btn && nav) {
-    const setExpanded = (isOpen) => {
-      btn.setAttribute("aria-expanded", String(isOpen));
-      nav.classList.toggle("open", isOpen);
-    };
-
-    // 초기 상태
-    setExpanded(false);
-
-    // 버튼 클릭: 토글
     btn.addEventListener("click", () => {
-      const isOpen = nav.classList.contains("open");
-      setExpanded(!isOpen);
+      const opened = nav.classList.toggle("open");
+      btn.setAttribute("aria-expanded", opened ? "true" : "false");
     });
 
-    // 바깥 클릭: 닫기 (모바일에서 유용)
+    // outside click close
     document.addEventListener("click", (e) => {
-      const isOpen = nav.classList.contains("open");
-      if (!isOpen) return;
-      const target = e.target;
-      if (target === btn || nav.contains(target)) return;
-      setExpanded(false);
-    });
-
-    // ESC: 닫기
-    document.addEventListener("keydown", (e) => {
-      if (e.key !== "Escape") return;
-      const isOpen = nav.classList.contains("open");
-      if (isOpen) setExpanded(false);
-    });
-
-    // 화면이 커지면(데스크톱) 모바일 메뉴 상태 초기화
-    const mq = window.matchMedia("(min-width: 721px)");
-    mq.addEventListener("change", (evt) => {
-      if (evt.matches) setExpanded(false);
+      if (!nav.classList.contains("open")) return;
+      const t = e.target;
+      if (btn.contains(t) || nav.contains(t)) return;
+      nav.classList.remove("open");
+      btn.setAttribute("aria-expanded", "false");
     });
   }
 
-  // ---------- (선택) Active menu highlight ----------
-  // nav 안의 링크가 현재 경로와 일치하면 active 클래스 부여
-  // CSS에서 .nav a.active 스타일 적용됨
-  const path = window.location.pathname.replace(/\/+$/, "/");
-  document.querySelectorAll(".nav a").forEach((a) => {
-    try {
-      const url = new URL(a.getAttribute("href"), window.location.origin);
-      const hrefPath = url.pathname.replace(/\/+$/, "/");
-      if (hrefPath === path) a.classList.add("active");
-    } catch (_) {}
-  });
+  // Scroll top buttons
+  const topBtn = document.querySelector("[data-scroll-top]");
+  if (topBtn) {
+    topBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  // HERO slider (right -> left, 3s interval, dots, no center emphasis)
+  const slider = document.querySelector("[data-slider]");
+  if (!slider) return;
+
+  const track = slider.querySelector("[data-track]");
+  const dotsWrap = slider.querySelector("[data-dots]");
+  const prevBtn = slider.querySelector("[data-prev]");
+  const nextBtn = slider.querySelector("[data-next]");
+
+  if (!track) return;
+
+  const slides = Array.from(track.children);
+  const count = slides.length;
+
+  // Create dots
+  const dots = [];
+  if (dotsWrap) {
+    for (let i = 0; i < count; i++) {
+      const d = document.createElement("button");
+      d.type = "button";
+      d.className = "dot" + (i === 0 ? " active" : "");
+      d.setAttribute("aria-label", `슬라이드 ${i + 1}`);
+      d.addEventListener("click", () => go(i, true));
+      dotsWrap.appendChild(d);
+      dots.push(d);
+    }
+  }
+
+  let index = 0;
+  let timer = null;
+  let isPaused = false;
+
+  const setDots = (i) => {
+    dots.forEach((d, di) => d.classList.toggle("active", di === i));
+  };
+
+  const apply = () => {
+    track.style.transform = `translate3d(${-index * 100}%, 0, 0)`;
+    setDots(index);
+  };
+
+  const go = (i, user = false) => {
+    index = (i + count) % count;
+    apply();
+    if (user) restart();
+  };
+
+  const next = (user = false) => go(index + 1, user); // 우→좌 이동 느낌 (왼쪽으로 넘어감)
+  const prev = (user = false) => go(index - 1, user);
+
+  const start = () => {
+    stop();
+    timer = setInterval(() => {
+      if (!isPaused) next(false);
+    }, 3000);
+  };
+
+  const stop = () => {
+    if (timer) clearInterval(timer);
+    timer = null;
+  };
+
+  const restart = () => {
+    // 사용자가 눌렀을 때 템포 재정렬
+    start();
+  };
+
+  if (nextBtn) nextBtn.addEventListener("click", () => next(true));
+  if (prevBtn) prevBtn.addEventListener("click", () => prev(true));
+
+  // Pause on hover/touch focus
+  slider.addEventListener("mouseenter", () => (isPaused = true));
+  slider.addEventListener("mouseleave", () => (isPaused = false));
+  slider.addEventListener("focusin", () => (isPaused = true));
+  slider.addEventListener("focusout", () => (isPaused = false));
+
+  // Swipe (mobile)
+  let sx = 0, dx = 0, down = false;
+  const onDown = (x) => { sx = x; dx = 0; down = true; isPaused = true; };
+  const onMove = (x) => { if (!down) return; dx = x - sx; };
+  const onUp = () => {
+    if (!down) return;
+    down = false;
+    const threshold = 40;
+    if (dx < -threshold) next(true);
+    else if (dx > threshold) prev(true);
+    isPaused = false;
+    dx = 0;
+  };
+
+  slider.addEventListener("touchstart", (e) => onDown(e.touches[0].clientX), { passive: true });
+  slider.addEventListener("touchmove", (e) => onMove(e.touches[0].clientX), { passive: true });
+  slider.addEventListener("touchend", onUp);
+
+  // Init
+  apply();
+  start();
+
+  // Reduce motion
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (mq.matches) stop();
 })();
