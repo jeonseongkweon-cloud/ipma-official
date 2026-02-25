@@ -1,22 +1,436 @@
-<main class="container">
-  <header class="page-head">
-    <h1>문서</h1>
-    <p class="lead">공식 문서와 운영 기준을 안내합니다.</p>
-  </header>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>IPMA | 문서</title>
+  <meta name="description" content="IPMA 공식 문서 및 운영 기준 안내. 운영 원칙, 안전·윤리 규정, 인증/심사 기준, 지부 운영 가이드 등." />
 
-  <section class="card">
-    <h2>운영 문서(예시)</h2>
-    <ul>
-      <li>연합회 운영 원칙</li>
-      <li>안전 규정 및 윤리 규정</li>
-      <li>인증/심사 기준</li>
-      <li>지부 운영 가이드</li>
-    </ul>
-    <p class="muted">※ 파일(PDF/이미지)은 assets 또는 별도 링크로 연결 가능합니다.</p>
-  </section>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a30;
+      --ink:#eaf0ff;
+      --muted:#a9b6d3;
+      --line:rgba(255,255,255,.10);
+      --gold:#d8b15a;
+      --blue:#5aa7ff;
+      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:26px;
+      --max: 1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+      background:
+        radial-gradient(1200px 700px at 20% 0%, rgba(90,167,255,.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 10%, rgba(216,177,90,.14), transparent 55%),
+        var(--bg);
+      color:var(--ink);
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
 
-  <div class="actions">
-    <a class="btn primary" href="../contact/index.html">문서 문의</a>
-    <a class="btn" href="../index.html">홈으로</a>
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px 16px 70px}
+
+    /* Top */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      position:sticky; top:10px; z-index:20;
+      backdrop-filter: blur(10px);
+    }
+    .brand{display:flex;align-items:center;gap:10px;min-width:0}
+    .mark{
+      width:40px;height:40px;border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,rgba(216,177,90,.30),rgba(90,167,255,.20));
+      border:1px solid var(--line);
+      font-weight:900;color:var(--gold);
+      flex:0 0 auto;
+    }
+    .brand strong{display:block; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .brand span{display:block; font-size:12px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+
+    .homeBtn{
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:13px;
+      transition:.2s;
+      flex:0 0 auto;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .homeBtn:hover{background:rgba(255,255,255,.07); transform:translateY(-2px);}
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--blue);
+      box-shadow:0 0 0 4px rgba(90,167,255,.12);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top:20px;
+      padding:26px 20px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+    }
+    .kicker{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:7px 11px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:12px;
+    }
+    .kicker b{color:var(--gold)}
+    .hero h1{margin:12px 0 8px; font-size:26px;}
+    .hero p{margin:0; color:var(--muted);}
+
+    /* Layout */
+    .row{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      margin-top:16px;
+    }
+    @media(max-width:920px){
+      .topbar{position:relative; top:auto}
+      .row{grid-template-columns:1fr}
+    }
+
+    /* Cards */
+    .card{
+      padding:20px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+    }
+    .card h2{
+      margin:0 0 12px;
+      color:var(--gold);
+      font-size:16px;
+    }
+
+    .muted{color:var(--muted); font-size:13px}
+
+    /* Document list */
+    .docList{
+      list-style:none;
+      padding:0; margin:0;
+      display:grid; gap:10px;
+    }
+    .docItem{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.02);
+      padding:12px 12px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .dLeft{min-width:0}
+    .dTitle{font-size:14px; margin:0 0 4px}
+    .dDesc{margin:0; color:var(--muted); font-size:12px; line-height:1.55}
+    .dMeta{
+      margin-top:8px;
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:12px;
+    }
+    .chip{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      border-radius:999px;
+      padding:4px 8px;
+    }
+    .dBtns{display:flex; gap:8px; flex-wrap:wrap; flex:0 0 auto}
+    .miniBtn{
+      padding:8px 10px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:12px;
+      transition:.2s;
+      cursor:pointer;
+      display:inline-flex; align-items:center; gap:8px;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .miniBtn:hover{background:rgba(255,255,255,.07); transform:translateY(-1px);}
+    .miniBtn .ico{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--blue);
+      box-shadow:0 0 0 4px rgba(90,167,255,.12);
+    }
+
+    /* Buttons */
+    .actions{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    .btn{
+      padding:11px 16px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:14px;
+      transition:.2s;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{transform:translateY(-2px); background:rgba(255,255,255,.08);}
+    .primary{
+      background:linear-gradient(135deg,var(--gold),#a88936);
+      color:#111;
+      font-weight:700;
+      border:none;
+    }
+
+    .toast{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+      min-height:18px;
+    }
+
+    footer{
+      margin-top:16px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      opacity:.95;
+    }
+    footer .hr{margin:12px auto 0; max-width:560px; height:1px; background: var(--line);}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Top -->
+    <div class="topbar">
+      <div class="brand">
+        <div class="mark">IPMA</div>
+        <div style="min-width:0">
+          <strong>International Police Martial Arts Alliance</strong>
+          <span>문서 · Documents</span>
+        </div>
+      </div>
+      <a class="homeBtn" href="../index.html"><span class="dot"></span>홈으로</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="kicker"><b>구조</b> >> 교차원리, 교차원리 기반 무도</div>
+      <h1>문서</h1>
+      <p>공식 문서와 운영 기준을 안내합니다. (PDF/이미지/링크 연결 가능)</p>
+    </section>
+
+    <div class="row">
+
+      <!-- Documents -->
+      <section class="card">
+        <h2>운영 문서</h2>
+
+        <!-- ✅ EDIT ZONE: 문서 목록/링크만 바꾸면 됩니다 -->
+        <ul class="docList" id="docList">
+          <li class="docItem">
+            <div class="dLeft">
+              <p class="dTitle"><strong>연합회 운영 원칙</strong></p>
+              <p class="dDesc">IPMA의 운영 철학, 조직 구조, 책임 기준을 안내합니다.</p>
+              <div class="dMeta">
+                <span class="chip">PDF</span>
+                <span class="chip">정책</span>
+              </div>
+            </div>
+            <div class="dBtns">
+              <a class="miniBtn" href="#" target="_blank" rel="noopener" aria-label="open">
+                <span class="ico"></span>열기
+              </a>
+              <button class="miniBtn" type="button" data-copy="(여기에 링크 입력)">
+                <span class="ico"></span>링크복사
+              </button>
+            </div>
+          </li>
+
+          <li class="docItem">
+            <div class="dLeft">
+              <p class="dTitle"><strong>안전 규정 및 윤리 규정</strong></p>
+              <p class="dDesc">부상 예방, 보호장비, 훈련 통제 및 지도자 윤리 기준.</p>
+              <div class="dMeta">
+                <span class="chip">PDF</span>
+                <span class="chip">안전</span>
+                <span class="chip">윤리</span>
+              </div>
+            </div>
+            <div class="dBtns">
+              <a class="miniBtn" href="#" target="_blank" rel="noopener">
+                <span class="ico"></span>열기
+              </a>
+              <button class="miniBtn" type="button" data-copy="(여기에 링크 입력)">
+                <span class="ico"></span>링크복사
+              </button>
+            </div>
+          </li>
+
+          <li class="docItem">
+            <div class="dLeft">
+              <p class="dTitle"><strong>인증 · 심사 기준</strong></p>
+              <p class="dDesc">지도자 단계별 인증 요건 및 심사·발급 기준.</p>
+              <div class="dMeta">
+                <span class="chip">PDF</span>
+                <span class="chip">인증</span>
+              </div>
+            </div>
+            <div class="dBtns">
+              <a class="miniBtn" href="#" target="_blank" rel="noopener">
+                <span class="ico"></span>열기
+              </a>
+              <button class="miniBtn" type="button" data-copy="(여기에 링크 입력)">
+                <span class="ico"></span>링크복사
+              </button>
+            </div>
+          </li>
+
+          <li class="docItem">
+            <div class="dLeft">
+              <p class="dTitle"><strong>지부 운영 가이드</strong></p>
+              <p class="dDesc">지부 신청, 운영 절차, 보고 체계 및 협력 기준.</p>
+              <div class="dMeta">
+                <span class="chip">PDF</span>
+                <span class="chip">지부</span>
+              </div>
+            </div>
+            <div class="dBtns">
+              <a class="miniBtn" href="#" target="_blank" rel="noopener">
+                <span class="ico"></span>열기
+              </a>
+              <button class="miniBtn" type="button" data-copy="(여기에 링크 입력)">
+                <span class="ico"></span>링크복사
+              </button>
+            </div>
+          </li>
+        </ul>
+        <!-- ✅ EDIT ZONE 끝 -->
+
+        <p class="muted" style="margin-top:12px;">
+          ※ 파일(PDF/이미지)은 GitHub <code>assets</code> 폴더에 올리거나, 외부 링크(Drive/Wix 등)로 연결할 수 있습니다.
+        </p>
+      </section>
+
+      <!-- Quick contact -->
+      <section class="card">
+        <h2>빠른 문의</h2>
+
+        <!-- ✅ EDIT ZONE: 연락처만 바꾸면 됩니다 -->
+        <div class="muted" style="margin-bottom:10px;">
+          문서 요청/발급, 운영 기준 문의, 제휴 문서 확인 등은 아래로 연락 주세요.
+        </div>
+
+        <ul class="docList" style="margin-top:10px;">
+          <li class="docItem">
+            <div class="dLeft">
+              <p class="dTitle"><strong>이메일</strong></p>
+              <p class="dDesc" id="emailText">jeonseongkweon@gmail.com</p>
+            </div>
+            <div class="dBtns">
+              <a class="miniBtn" href="mailto:jeonseongkweon@gmail.com?subject=IPMA%20%EB%AC%B8%EC%84%9C%20%EB%AC%B8%EC%9D%98&body=%EB%AC%B8%EC%84%9C%20%EC%A0%9C%EB%AA%A9%3A%0A%EC%9A%A9%EB%8F%84%3A%0A%EA%B5%AD%EA%B0%80/%EB%8F%84%EC%8B%9C%3A%0A%EC%86%8C%EC%86%8D%3A%0A%EC%97%B0%EB%9D%BD%EB%B0%A9%EB%B2%95%3A" target="_blank" rel="noopener">
+                <span class="ico"></span>메일
+              </a>
+              <button class="miniBtn" type="button" onclick="copyText('emailText')">
+                <span class="ico"></span>복사
+              </button>
+            </div>
+          </li>
+
+          <li class="docItem">
+            <div class="dLeft">
+              <p class="dTitle"><strong>카카오톡 오픈채팅</strong></p>
+              <p class="dDesc" id="kakaoText">https://open.kakao.com/o/g60Wr8hi</p>
+            </div>
+            <div class="dBtns">
+              <a class="miniBtn" href="https://open.kakao.com/o/g60Wr8hi" target="_blank" rel="noopener">
+                <span class="ico"></span>열기
+              </a>
+              <button class="miniBtn" type="button" onclick="copyText('kakaoText')">
+                <span class="ico"></span>복사
+              </button>
+            </div>
+          </li>
+        </ul>
+        <!-- ✅ EDIT ZONE 끝 -->
+
+        <div class="actions">
+          <a class="btn primary" href="../contact/index.html">문서 문의</a>
+          <a class="btn" href="../index.html">홈으로</a>
+        </div>
+
+        <div class="toast" id="toast"></div>
+      </section>
+
+    </div>
+
+    <footer>
+      <div class="hr"></div>
+      <p>© <span id="year"></span> IPMA · International Police Martial Arts Alliance</p>
+    </footer>
+
   </div>
-</main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function toast(msg){
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(()=>t.textContent="", 2500);
+    }
+
+    function copyRawText(text){
+      const txt = String(text || "").trim();
+      if(!txt) return toast("복사할 내용이 없습니다.");
+      navigator.clipboard.writeText(txt).then(()=>{
+        toast("복사 완료: " + txt);
+      }).catch(()=>{
+        const ta = document.createElement("textarea");
+        ta.value = txt;
+        document.body.appendChild(ta);
+        ta.select();
+        try{
+          document.execCommand("copy");
+          toast("복사 완료: " + txt);
+        }catch(e){
+          toast("복사 실패: 브라우저 권한을 확인해 주세요.");
+        }
+        ta.remove();
+      });
+    }
+
+    function copyText(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      copyRawText(el.textContent);
+    }
+
+    // 문서 링크복사 버튼 처리(data-copy)
+    document.addEventListener("click", (e)=>{
+      const btn = e.target.closest("button[data-copy]");
+      if(!btn) return;
+      copyRawText(btn.getAttribute("data-copy"));
+    });
+  </script>
+</body>
+</html>
