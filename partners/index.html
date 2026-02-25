@@ -1,29 +1,576 @@
-<main class="container">
-  <header class="page-head">
-    <h1>파트너</h1>
-    <p class="lead">공공안전과 책임 있는 무도 문화를 위해 국내·해외 파트너와 협력합니다.</p>
-  </header>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>IPMA | 파트너</title>
+  <meta name="description" content="공공안전과 책임 있는 무도 문화를 위해 국내·해외 파트너와 협력합니다. 기관 교류, 지부 협력, 콘텐츠 공동 개발, 캠페인." />
 
-  <section class="card">
-    <h2>협력 분야</h2>
-    <ul>
-      <li>기관/단체 교류 및 공동 세미나</li>
-      <li>국가별 지부 운영 협력</li>
-      <li>교육 콘텐츠 공동 개발</li>
-      <li>청소년/교육/안전 캠페인</li>
-    </ul>
-  </section>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a30;
+      --ink:#eaf0ff;
+      --muted:#a9b6d3;
+      --line:rgba(255,255,255,.10);
+      --gold:#d8b15a;
+      --blue:#5aa7ff;
+      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:26px;
+      --max: 1150px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+      background:
+        radial-gradient(1200px 700px at 20% 0%, rgba(90,167,255,.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 10%, rgba(216,177,90,.14), transparent 55%),
+        var(--bg);
+      color:var(--ink);
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
 
-  <section class="card">
-    <h2>파트너 목록(예시)</h2>
-    <div class="list">
-      <div class="list-item"><strong>(단체명)</strong> · (국가) · (협력 내용)</div>
-      <div class="list-item"><strong>(단체명)</strong> · (국가) · (협력 내용)</div>
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px 16px 70px}
+
+    /* Top */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      position:sticky; top:10px; z-index:20;
+      backdrop-filter: blur(10px);
+    }
+    .brand{display:flex;align-items:center;gap:10px;min-width:0}
+    .mark{
+      width:40px;height:40px;border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,rgba(216,177,90,.30),rgba(90,167,255,.20));
+      border:1px solid var(--line);
+      font-weight:900;color:var(--gold);
+      flex:0 0 auto;
+    }
+    .brand strong{display:block; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .brand span{display:block; font-size:12px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+
+    .homeBtn{
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:13px;
+      transition:.2s;
+      flex:0 0 auto;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .homeBtn:hover{background:rgba(255,255,255,.07); transform:translateY(-2px);}
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--blue);
+      box-shadow:0 0 0 4px rgba(90,167,255,.12);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top:20px;
+      padding:26px 20px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+    }
+    .kicker{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:7px 11px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:12px;
+    }
+    .kicker b{color:var(--gold)}
+    .hero h1{margin:12px 0 8px; font-size:26px;}
+    .hero p{margin:0; color:var(--muted);}
+
+    /* Layout */
+    .row{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:14px;
+      margin-top:16px;
+    }
+    @media(max-width:980px){
+      .topbar{position:relative; top:auto}
+      .row{grid-template-columns:1fr}
+    }
+
+    /* Cards */
+    .card{
+      padding:20px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+    }
+    .card h2{
+      margin:0 0 12px;
+      color:var(--gold);
+      font-size:16px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      flex-wrap:wrap;
+    }
+    .muted{color:var(--muted); font-size:13px}
+    .chip{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+
+    /* Controls */
+    .controls{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+    .select, .search{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color: var(--ink);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:12px;
+      outline:none;
+    }
+    .search{min-width: 220px}
+
+    /* Partner grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:12px;
+      margin-top:10px;
+    }
+    @media(max-width:820px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .pcard{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.02);
+      overflow:hidden;
+      display:flex;
+      gap:12px;
+      padding:12px;
+      transition:.2s transform, .2s border;
+      min-height: 120px;
+    }
+    .pcard:hover{transform: translateY(-2px); border-color: rgba(216,177,90,.35);}
+    .logo{
+      width:64px; height:64px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      display:grid; place-items:center;
+      flex:0 0 auto;
+      overflow:hidden;
+    }
+    .logo img{width:100%; height:100%; object-fit:cover; display:block}
+    .logo span{font-weight:800; color:var(--muted); font-size:12px}
+    .pbody{min-width:0; flex:1; display:flex; flex-direction:column; gap:6px}
+    .ptitle{margin:0; font-size:14px; line-height:1.35}
+    .pdesc{margin:0; color:var(--muted); font-size:12px; line-height:1.55}
+    .meta{
+      margin-top:auto;
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:12px;
+    }
+    .badge{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      border-radius:999px;
+      padding:4px 8px;
+      white-space:nowrap;
+    }
+    .pbtns{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; align-items:flex-start}
+    .miniBtn{
+      padding:8px 10px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:12px;
+      transition:.2s;
+      cursor:pointer;
+      display:inline-flex; align-items:center; gap:8px;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .miniBtn:hover{background:rgba(255,255,255,.07); transform:translateY(-1px);}
+    .miniBtn .ico{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--blue);
+      box-shadow:0 0 0 4px rgba(90,167,255,.12);
+    }
+
+    /* Quick contact list */
+    .list{display:grid; gap:10px; margin-top:10px;}
+    .item{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.02);
+      padding:12px 12px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .left{min-width:0}
+    .sub{margin:0; color:var(--muted); font-size:12px; line-height:1.55}
+    .right{
+      display:flex; flex-direction:column; gap:8px; align-items:flex-end;
+      flex:0 0 auto;
+    }
+
+    /* Buttons */
+    .actions{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    .btn{
+      padding:11px 16px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:14px;
+      transition:.2s;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{transform:translateY(-2px); background:rgba(255,255,255,.08);}
+    .primary{
+      background:linear-gradient(135deg,var(--gold),#a88936);
+      color:#111;
+      font-weight:700;
+      border:none;
+    }
+
+    .toast{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+      min-height:18px;
+    }
+
+    footer{
+      margin-top:16px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      opacity:.95;
+    }
+    footer .hr{margin:12px auto 0; max-width:560px; height:1px; background: var(--line);}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Top -->
+    <div class="topbar">
+      <div class="brand">
+        <div class="mark">IPMA</div>
+        <div style="min-width:0">
+          <strong>International Police Martial Arts Alliance</strong>
+          <span>파트너 · Partners</span>
+        </div>
+      </div>
+      <a class="homeBtn" href="../index.html"><span class="dot"></span>홈으로</a>
     </div>
-  </section>
 
-  <div class="actions">
-    <a class="btn primary" href="../contact/index.html">파트너 제휴 문의</a>
-    <a class="btn" href="../index.html">홈으로</a>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="kicker"><b>구조</b> >> 교차원리, 교차원리 기반 무도</div>
+      <h1>파트너</h1>
+      <p>공공안전과 책임 있는 무도 문화를 위해 국내·해외 파트너와 협력합니다.</p>
+    </section>
+
+    <div class="row">
+
+      <!-- Main -->
+      <section class="card">
+        <h2>협력 분야</h2>
+        <ul style="margin:0; padding-left:18px">
+          <li>기관/단체 교류 및 공동 세미나</li>
+          <li>국가별 지부 운영 협력</li>
+          <li>교육 콘텐츠 공동 개발</li>
+          <li>청소년/교육/안전 캠페인</li>
+        </ul>
+
+        <div style="height:14px"></div>
+
+        <h2>
+          파트너 목록
+          <span class="chip" id="countText">0건</span>
+        </h2>
+
+        <div class="controls">
+          <input class="search" id="q" type="search" placeholder="파트너 검색 (단체명/국가/키워드)" />
+          <select class="select" id="countryFilter" aria-label="country filter">
+            <option value="ALL">전체 국가</option>
+          </select>
+          <select class="select" id="typeFilter" aria-label="type filter">
+            <option value="ALL">전체 유형</option>
+          </select>
+          <span class="muted">※ 목록은 업데이트됩니다.</span>
+        </div>
+
+        <div class="grid" id="partnerGrid"></div>
+
+        <div class="actions">
+          <a class="btn primary" href="../contact/index.html">파트너 제휴 문의</a>
+          <a class="btn" href="../index.html">홈으로</a>
+        </div>
+      </section>
+
+      <!-- Quick contact -->
+      <section class="card">
+        <h2>빠른 문의</h2>
+        <p class="muted" style="margin-top:-4px;">
+          제휴 제안, 공동 세미나, 국가 지부 협력은 아래로 연락 주세요.
+        </p>
+
+        <!-- ✅ EDIT ZONE: 연락처만 바꾸면 됩니다 -->
+        <div class="list">
+          <div class="item">
+            <div class="left">
+              <p style="margin:0 0 4px;"><strong>이메일</strong></p>
+              <p class="sub" id="emailText">jeonseongkweon@gmail.com</p>
+            </div>
+            <div class="right">
+              <a class="miniBtn" href="mailto:jeonseongkweon@gmail.com?subject=IPMA%20%ED%8C%8C%ED%8A%B8%EB%84%88%20%EC%A0%9C%ED%9C%B4%20%EB%AC%B8%EC%9D%98&body=%EB%8B%A8%EC%B2%B4%EB%AA%85%3A%0A%EA%B5%AD%EA%B0%80/%EB%8F%84%EC%8B%9C%3A%0A%ED%98%91%EB%A0%A5%20%EB%B6%84%EC%95%BC%3A%0A%EC%9B%90%ED%95%98%EB%8A%94%20%ED%98%91%EB%A0%A5%20%EB%82%B4%EC%9A%A9%3A%0A%EC%97%B0%EB%9D%BD%EB%B0%A9%EB%B2%95%3A" target="_blank" rel="noopener">
+                <span class="ico"></span>메일
+              </a>
+              <button class="miniBtn" type="button" onclick="copyText('emailText')">
+                <span class="ico"></span>복사
+              </button>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="left">
+              <p style="margin:0 0 4px;"><strong>카카오톡 오픈채팅</strong></p>
+              <p class="sub" id="kakaoText">https://open.kakao.com/o/g60Wr8hi</p>
+            </div>
+            <div class="right">
+              <a class="miniBtn" href="https://open.kakao.com/o/g60Wr8hi" target="_blank" rel="noopener">
+                <span class="ico"></span>열기
+              </a>
+              <button class="miniBtn" type="button" onclick="copyText('kakaoText')">
+                <span class="ico"></span>복사
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- ✅ EDIT ZONE 끝 -->
+
+        <div class="toast" id="toast"></div>
+
+        <div class="actions">
+          <a class="btn primary" href="../contact/index.html">파트너 제휴 문의</a>
+          <a class="btn" href="../index.html">홈으로</a>
+        </div>
+      </section>
+
+    </div>
+
+    <footer>
+      <div class="hr"></div>
+      <p>© <span id="year"></span> IPMA · International Police Martial Arts Alliance</p>
+    </footer>
+
   </div>
-</main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // =========================================================
+    // ✅ EDIT ZONE: 파트너를 “한 줄 추가”로 늘립니다
+    // name: 단체명
+    // country: 국가
+    // city: (선택)
+    // type: "기관" | "단체" | "도장" | "교육" | "언론" | "협력기관" 등
+    // desc: 협력 내용
+    // url: (선택) 웹사이트/소개 링크
+    // logo: (선택) 이미지 URL (없으면 약자 표시)
+    // tags: (선택) ["세미나","지부","콘텐츠"]
+    // =========================================================
+    const PARTNERS = [
+      {
+        name: "파트너 예시 A",
+        country: "대한민국",
+        city: "서울",
+        type: "기관",
+        desc: "공동 세미나 및 교육 협력",
+        url: "#",
+        logo: "",
+        tags: ["세미나","교육"]
+      },
+      {
+        name: "파트너 예시 B",
+        country: "호주",
+        city: "",
+        type: "단체",
+        desc: "국가 지부 운영 및 국제 교류",
+        url: "#",
+        logo: "",
+        tags: ["지부","국제교류"]
+      }
+    ];
+    // =========================================================
+    // ✅ EDIT ZONE 끝
+    // =========================================================
+
+    const $grid = document.getElementById("partnerGrid");
+    const $countText = document.getElementById("countText");
+    const $q = document.getElementById("q");
+    const $country = document.getElementById("countryFilter");
+    const $type = document.getElementById("typeFilter");
+
+    function escapeHtml(s){
+      return String(s ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function initials(name){
+      const n = (name||"").trim();
+      if(!n) return "IP";
+      const parts = n.split(/\s+/).filter(Boolean);
+      if(parts.length===1) return parts[0].slice(0,2).toUpperCase();
+      return (parts[0][0] + parts[1][0]).toUpperCase();
+    }
+
+    function buildFilters(data){
+      const countries = Array.from(new Set(data.map(p=>p.country).filter(Boolean))).sort((a,b)=>a.localeCompare(b));
+      $country.innerHTML = `<option value="ALL">전체 국가</option>` + countries.map(c=>`<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
+
+      const types = Array.from(new Set(data.map(p=>p.type).filter(Boolean))).sort((a,b)=>a.localeCompare(b));
+      $type.innerHTML = `<option value="ALL">전체 유형</option>` + types.map(t=>`<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join("");
+    }
+
+    function card(p){
+      const where = [p.country, p.city].filter(Boolean).join(" · ");
+      const tags = Array.isArray(p.tags) ? p.tags : [];
+      const link = (p.url && p.url.trim() && p.url.trim() !== "#") ? p.url.trim() : "";
+      const logo = (p.logo && p.logo.trim()) ? p.logo.trim() : "";
+
+      return `
+        <div class="pcard" data-country="${escapeHtml(p.country||"")}" data-type="${escapeHtml(p.type||"")}" data-text="${escapeHtml([p.name,p.country,p.city,p.type,p.desc,(tags||[]).join(" ")].join(" ").toLowerCase())}">
+          <div class="logo">
+            ${logo ? `<img src="${escapeHtml(logo)}" alt="${escapeHtml(p.name||"Partner")}" loading="lazy">`
+                  : `<span>${escapeHtml(initials(p.name))}</span>`
+            }
+          </div>
+
+          <div class="pbody">
+            <p class="ptitle"><strong>${escapeHtml(p.name||"파트너")}</strong></p>
+            <p class="pdesc">${where ? `<span class="badge">${escapeHtml(where)}</span> ` : ""}${escapeHtml(p.desc||"")}</p>
+
+            <div class="meta">
+              ${p.type ? `<span class="badge">${escapeHtml(p.type)}</span>` : ""}
+              ${tags.slice(0,3).map(t=>`<span class="badge">${escapeHtml(t)}</span>`).join("")}
+            </div>
+          </div>
+
+          <div class="pbtns">
+            ${link ? `<a class="miniBtn" href="${escapeHtml(link)}" target="_blank" rel="noopener"><span class="ico"></span>소개</a>` : ``}
+            <button class="miniBtn" type="button" data-copy="${escapeHtml(p.name||"파트너")} | ${escapeHtml(where)} | ${escapeHtml(p.desc||"")}">
+              <span class="ico"></span>복사
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function applyFilter(){
+      const qq = ($q.value || "").trim().toLowerCase();
+      const c = $country.value;
+      const t = $type.value;
+
+      const cards = $grid.querySelectorAll(".pcard");
+      let shown = 0;
+
+      cards.forEach(el=>{
+        const ec = el.getAttribute("data-country") || "";
+        const et = el.getAttribute("data-type") || "";
+        const text = el.getAttribute("data-text") || "";
+
+        const ok = (c==="ALL" || ec===c) && (t==="ALL" || et===t) && (!qq || text.includes(qq));
+        el.style.display = ok ? "" : "none";
+        if(ok) shown++;
+      });
+
+      $countText.textContent = `${shown}건`;
+    }
+
+    function render(){
+      const data = [...PARTNERS].filter(p => p && p.name);
+      buildFilters(data);
+      $grid.innerHTML = data.map(card).join("");
+      applyFilter();
+    }
+
+    // Copy helpers
+    function toast(msg){
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(()=>t.textContent="", 2500);
+    }
+    function copyRawText(text){
+      const txt = String(text || "").trim();
+      if(!txt) return toast("복사할 내용이 없습니다.");
+      navigator.clipboard.writeText(txt).then(()=>{
+        toast("복사 완료: " + txt);
+      }).catch(()=>{
+        const ta = document.createElement("textarea");
+        ta.value = txt;
+        document.body.appendChild(ta);
+        ta.select();
+        try{
+          document.execCommand("copy");
+          toast("복사 완료: " + txt);
+        }catch(e){
+          toast("복사 실패: 브라우저 권한을 확인해 주세요.");
+        }
+        ta.remove();
+      });
+    }
+    function copyText(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      copyRawText(el.textContent);
+    }
+
+    document.addEventListener("click", (e)=>{
+      const btn = e.target.closest("button[data-copy]");
+      if(!btn) return;
+      copyRawText(btn.getAttribute("data-copy"));
+    });
+
+    $q.addEventListener("input", applyFilter);
+    $country.addEventListener("change", applyFilter);
+    $type.addEventListener("change", applyFilter);
+
+    render();
+  </script>
+</body>
+</html>
