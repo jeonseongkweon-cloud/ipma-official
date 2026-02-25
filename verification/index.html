@@ -1,30 +1,532 @@
-<main class="container">
-  <header class="page-head">
-    <h1>자격 · 단증 조회</h1>
-    <p class="lead">인증번호 또는 성명/생년월일로 확인할 수 있는 조회 서비스를 준비 중입니다.</p>
-  </header>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>조회/검색 | IPMA</title>
 
-  <section class="card">
-    <h2>조회 방법</h2>
-    <ol>
-      <li>인증번호(또는 등록 정보)를 입력</li>
-      <li>본인 확인 후 결과 표시(등급, 발급일, 유효 상태)</li>
-      <li>필요 시 확인서 발급 안내</li>
-    </ol>
-    <p class="muted">※ 현재 페이지는 안내용이며, 데이터 연동은 순차적으로 적용됩니다.</p>
-  </section>
+  <!-- =========================================
+   🔴🔴🔴 CHANGE ZONE (여기만 자주 수정) 🔴🔴🔴
+   ✅ Ctrl+F 로 "CHANGE ZONE" 또는 "🔴" 검색
+   ========================================= -->
+  <script>
+    const CONFIG = {
+      BRAND: {
+        TITLE: "IPMA",
+        SUBTITLE: "STRUCTURE >> 교차원리 · 교차원리 기반 무도"
+      },
 
-  <section class="card">
-    <h2>조회가 필요한 경우</h2>
-    <ul>
-      <li>지도자 자격 확인</li>
-      <li>세미나 수료 확인</li>
-      <li>공식 지정 기관/도장 확인</li>
-    </ul>
-  </section>
+      // ✅ GitHub Pages(프로젝트 페이지)에서도 깨지지 않게 상대경로 권장
+      LINKS: {
+        // verification/ 폴더에서 홈(루트 index.html)로 이동
+        HOME: "../"
+      },
 
-  <div class="actions">
-    <a class="btn primary" href="../contact/index.html">조회 오류/문의</a>
-    <a class="btn" href="../index.html">홈으로</a>
+      TEXT: {
+        PLACEHOLDER: "도장명 / 지부명 / 임원명 / 지역 / 인증번호 입력",
+        TIP: "도장·지부·임원은 이름/지역으로 검색 · 자격/인증은 인증번호로 확인",
+        EMPTY: "검색 결과가 없습니다. 다른 검색어로 다시 시도해 주세요.",
+        NEED_CERT_NO: "자격/인증 조회는 '인증번호'로 가장 정확합니다.\n인증번호를 입력해 주세요."
+      },
+
+      DATA: {
+        // ✅ data.js 캐시 갱신용(수정 후 숫자만 올리면 즉시 반영됨)
+        VERSION: "1"
+      },
+
+      // ✅ 메뉴 경로(verification 폴더 기준)
+      MENU: [
+        { label: "조회", href: "./", active: true },
+        { label: "연합회 소개", href: "../about/" },
+        { label: "임원소개", href: "../leadership/" },
+        { label: "프로그램", href: "../programs/" },
+        { label: "자료실", href: "../resources/" },
+        { label: "갤러리&영상", href: "../media/" },
+        { label: "산하&협력기관", href: "../partners/" },
+        { label: "신청&문의", href: "../contact/" }
+      ]
+    };
+  </script>
+  <!-- 🔴🔴🔴 CHANGE ZONE END 🔴🔴🔴 -->
+
+  <style>
+    :root{
+      --bg:#070a10;
+      --panel:rgba(16,24,38,.78);
+      --line:rgba(255,255,255,.12);
+      --text:#eaf0ff;
+      --muted:rgba(234,240,255,.72);
+      --gold:#ffd36a;
+      --shadow:0 22px 70px rgba(0,0,0,.55);
+      --r:26px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Malgun Gothic,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1100px 700px at 10% 0%, rgba(255,211,106,.20), transparent 60%),
+        radial-gradient(1100px 700px at 90% 0%, rgba(103,183,255,.18), transparent 60%),
+        radial-gradient(900px 520px at 50% 120%, rgba(141,98,255,.10), transparent 60%),
+        var(--bg);
+      overflow-x:hidden;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .stage{
+      min-height:100%;
+      display:flex;
+      justify-content:center;
+      padding:18px 12px 52px;
+    }
+    .card{
+      width:min(520px, 100%);
+      border-radius:var(--r);
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(16,24,38,.86), rgba(16,24,38,.48));
+      box-shadow:0 30px 90px rgba(0,0,0,.62);
+      overflow:hidden;
+      position:relative;
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:14px 14px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.18);
+      backdrop-filter: blur(10px);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width:0;
+    }
+    .logo{
+      width:34px;height:34px;border-radius:12px;
+      border:1px solid rgba(255,211,106,.28);
+      background:rgba(255,211,106,.06);
+      display:grid;place-items:center;
+      font-weight:1000;
+      color:rgba(255,211,106,.95);
+      box-shadow:0 14px 40px rgba(0,0,0,.45);
+      flex:0 0 auto;
+    }
+    .brandText{min-width:0}
+    .brandTitle{
+      font-weight:1000;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .pill{
+      font-size:11px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:rgba(234,240,255,.72);
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .menu{
+      display:flex;
+      gap:10px;
+      padding:12px 14px 0;
+      flex-wrap:wrap;
+    }
+    .menu a{
+      text-decoration:none;
+      color:var(--text);
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      font-weight:900;
+      font-size:12px;
+    }
+    .menu a.active{
+      border-color:rgba(255,211,106,.50);
+      box-shadow:0 0 0 1px rgba(255,211,106,.08);
+    }
+
+    .body{ padding:14px; }
+    h1{
+      margin:10px 0 6px;
+      font-size:20px;
+      font-weight:1000;
+      letter-spacing:.2px;
+    }
+    .sub{
+      margin:0 0 12px;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.15px;
+    }
+
+    .searchWrap{
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:20px;
+      background:rgba(0,0,0,.20);
+      padding:12px;
+      box-shadow:var(--shadow);
+    }
+    .input{
+      width:100%;
+      padding:14px 14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.25);
+      color:var(--text);
+      font-weight:900;
+      outline:none;
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    .btn{
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      padding:13px 12px;border-radius:16px;
+      text-decoration:none;font-weight:1000;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      user-select:none;
+      text-align:center;
+      cursor:pointer;
+    }
+    .btn:active{transform:scale(.985); filter:brightness(1.05);}
+    .btn.primary{
+      border-color:rgba(255,211,106,.65);
+      background:linear-gradient(135deg, rgba(255,211,106,.36), rgba(184,135,26,.14));
+      color:#111;
+    }
+    .tip{
+      margin:10px 2px 0;
+      color:rgba(234,240,255,.70);
+      font-size:12px;
+      font-weight:800;
+      line-height:1.35;
+    }
+
+    .results{ margin-top:12px; display:grid; gap:10px; }
+    .resultCard{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(16,24,38,.45);
+      padding:12px;
+      box-shadow:0 18px 55px rgba(0,0,0,.35);
+    }
+    .rTop{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom:8px;
+    }
+    .rType{
+      font-size:11px;
+      font-weight:1000;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,211,106,.28);
+      background:rgba(255,211,106,.08);
+      color:rgba(255,211,106,.95);
+      white-space:nowrap;
+    }
+    .rTitle{
+      font-weight:1000;
+      font-size:14px;
+      letter-spacing:.1px;
+      line-height:1.25;
+      margin:0;
+    }
+    .rMeta{
+      margin-top:6px;
+      font-size:12px;
+      color:rgba(234,240,255,.80);
+      line-height:1.45;
+      font-weight:800;
+    }
+    .rLinks{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .mini{
+      text-decoration:none;
+      color:var(--text);
+      font-size:12px;
+      font-weight:900;
+      padding:9px 10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+    }
+    .mini.gold{
+      border-color:rgba(255,211,106,.45);
+      background:rgba(255,211,106,.12);
+      color:#111;
+    }
+
+    .empty{
+      margin-top:12px;
+      padding:12px;
+      border-radius:18px;
+      border:1px dashed rgba(255,255,255,.22);
+      color:rgba(234,240,255,.70);
+      font-weight:900;
+      font-size:12px;
+      line-height:1.45;
+      white-space:pre-line;
+    }
+
+    .footer{
+      padding:14px;
+      text-align:center;
+      font-size:11px;
+      color:rgba(234,240,255,.55);
+      border-top:1px solid rgba(255,255,255,.10);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stage">
+    <main class="card" aria-label="IPMA 조회/검색">
+
+      <!-- 상단바 -->
+      <div class="topbar">
+        <div class="brand">
+          <div class="logo">IP</div>
+          <div class="brandText">
+            <div class="brandTitle" id="brandTitle">IPMA</div>
+          </div>
+        </div>
+        <div class="pill">조회</div>
+      </div>
+
+      <!-- 메뉴 (JS로 생성) -->
+      <nav class="menu" id="menu" aria-label="IPMA menu"></nav>
+
+      <section class="body">
+        <h1>공식 지정도장 / 지부 / 임원 / 자격·인증</h1>
+        <p class="sub" id="brandSubtitle">STRUCTURE >> 교차원리 · 교차원리 기반 무도</p>
+
+        <div class="searchWrap">
+          <input class="input" id="q" type="text" autocomplete="off" />
+          <div class="row">
+            <button class="btn primary" id="btnSearch" type="button">조회하기</button>
+            <a class="btn" id="btnHome" href="#" target="_self" rel="noopener">홈으로</a>
+          </div>
+
+          <div class="tip" id="tipText"></div>
+
+          <div class="results" id="results"></div>
+          <div class="empty" id="emptyBox" style="display:none;"></div>
+        </div>
+      </section>
+
+      <div class="footer">© 2026 IPMA. All rights reserved.</div>
+    </main>
   </div>
-</main>
+
+  <!-- ✅✅✅ (가장 중요) 데이터 먼저 로드 -->
+  <script>
+    const s = document.createElement("script");
+    s.src = "./data.js?v=" + encodeURIComponent(CONFIG.DATA.VERSION);
+    document.body.appendChild(s);
+  </script>
+
+  <!-- ✅ 검색 로직 (data.js 로드 후 실행 보장) -->
+  <script>
+    // UI 텍스트 적용
+    document.getElementById("brandTitle").textContent = CONFIG.BRAND.TITLE;
+    document.getElementById("brandSubtitle").textContent = CONFIG.BRAND.SUBTITLE;
+    document.getElementById("btnHome").href = CONFIG.LINKS.HOME;
+
+    // 메뉴 생성
+    const menuEl = document.getElementById("menu");
+    menuEl.innerHTML = CONFIG.MENU.map(m => {
+      const cls = m.active ? "active" : "";
+      return `<a class="${cls}" href="${m.href}">${m.label}</a>`;
+    }).join("");
+
+    const input = document.getElementById("q");
+    const tip = document.getElementById("tipText");
+    const resultsEl = document.getElementById("results");
+    const emptyBox = document.getElementById("emptyBox");
+
+    input.placeholder = CONFIG.TEXT.PLACEHOLDER;
+    tip.textContent = "💡 " + CONFIG.TEXT.TIP;
+
+    function norm(s){
+      return String(s || "")
+        .toLowerCase()
+        .replace(/\s+/g,"")
+        .replace(/[·•\-\(\)\[\]{}]/g,"");
+    }
+
+    function escapeHtml(str){
+      return String(str||"")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#39;");
+    }
+
+    function isCertType(t){
+      // IPMA에서는 자격/인증/등록 계열을 인증번호 우선으로 유도
+      return ["자격","인증","등록","CERT","LICENSE","ID","CARD"].some(k => norm(t).includes(norm(k)));
+    }
+
+    function showEmpty(msg){
+      resultsEl.innerHTML = "";
+      emptyBox.style.display = "block";
+      emptyBox.textContent = msg;
+    }
+
+    function showResults(list){
+      emptyBox.style.display = "none";
+      resultsEl.innerHTML = "";
+
+      list.forEach(item=>{
+        const type = item.type || "정보";
+        const title =
+          item.dojangName ||
+          item.branchName ||
+          item.officerName ||
+          item.name ||
+          item.title ||
+          "결과";
+
+        const regionText = [item.country, item.region, item.city].filter(Boolean).join(" / ");
+        const master = item.masterName ? `대표/관장: ${item.masterName}` : "";
+        const role = item.role ? `직책: ${item.role}` : "";
+        const contact = item.contact ? `연락처: ${item.contact}` : "";
+        const certNo = item.certNo ? `인증번호: ${item.certNo}` : "";
+        const kind = item.kind ? `분류: ${item.kind}` : "";
+
+        const link = item.link || "";
+        const photo = item.photo || "";
+
+        const metaLines = [
+          regionText ? `지역: ${regionText}` : "",
+          role,
+          master,
+          contact,
+          kind,
+          certNo
+        ].filter(Boolean);
+
+        const card = document.createElement("div");
+        card.className = "resultCard";
+        card.innerHTML = `
+          <div class="rTop">
+            <div class="rType">${escapeHtml(type)}</div>
+          </div>
+          <p class="rTitle">${escapeHtml(title)}</p>
+          <div class="rMeta">${metaLines.map(x=>escapeHtml(x)).join("<br>")}</div>
+          <div class="rLinks">
+            ${link ? `<a class="mini gold" href="${escapeHtml(link)}" target="_blank" rel="noopener">바로가기</a>` : ""}
+            ${photo ? `<a class="mini" href="${escapeHtml(photo)}" target="_blank" rel="noopener">사진</a>` : ""}
+          </div>
+        `;
+        resultsEl.appendChild(card);
+      });
+    }
+
+    function bootWhenDataReady(){
+      // ✅ data.js 에서 아래 중 하나(또는 여러 개)를 제공하면 됨
+      // - window.DB (통합 배열)
+      // - window.DOJANGS / window.BRANCHES / window.OFFICERS / window.CERTS
+      const hasData =
+        Array.isArray(window.DB) ||
+        Array.isArray(window.DOJANGS) ||
+        Array.isArray(window.BRANCHES) ||
+        Array.isArray(window.OFFICERS) ||
+        Array.isArray(window.CERTS);
+
+      if(!hasData) return false;
+
+      const list = [];
+      if(Array.isArray(window.DB)) list.push(...window.DB);
+      if(Array.isArray(window.DOJANGS)) list.push(...window.DOJANGS);
+      if(Array.isArray(window.BRANCHES)) list.push(...window.BRANCHES);
+      if(Array.isArray(window.OFFICERS)) list.push(...window.OFFICERS);
+      if(Array.isArray(window.CERTS)) list.push(...window.CERTS);
+
+      function search(){
+        const q = input.value.trim();
+        if(!q){
+          showEmpty("검색어를 입력해 주세요.");
+          return;
+        }
+
+        const nq = norm(q);
+
+        const hits = list.filter(x=>{
+          const pool = [
+            x.type,
+            x.country, x.region, x.city,
+            x.dojangName, x.branchName,
+            x.officerName, x.masterName,
+            x.role,
+            x.name, x.title,
+            x.contact,
+            x.kind,
+            x.certNo, x.id
+          ].filter(Boolean).join(" ");
+
+          return norm(pool).includes(nq);
+        });
+
+        if(hits.length){
+          showResults(hits);
+          return;
+        }
+
+        // 자격/인증 계열은 인증번호 유도
+        const maybeCert = list.some(x => isCertType(x.type));
+        if(maybeCert){
+          showEmpty(CONFIG.TEXT.EMPTY + "\n\n💡 " + CONFIG.TEXT.NEED_CERT_NO);
+          return;
+        }
+
+        showEmpty(CONFIG.TEXT.EMPTY);
+      }
+
+      document.getElementById("btnSearch").addEventListener("click", search);
+      input.addEventListener("keydown", (e)=>{ if(e.key==="Enter") search(); });
+
+      showEmpty(
+        "검색어를 입력하면 결과가 카드로 표시됩니다.\n" +
+        "✅ 도장/지부/임원: 이름·지역·기관명\n" +
+        "✅ 자격/인증: 인증번호"
+      );
+      return true;
+    }
+
+    let tries = 0;
+    const timer = setInterval(()=>{
+      tries++;
+      if(bootWhenDataReady()){
+        clearInterval(timer);
+      }else if(tries > 60){
+        clearInterval(timer);
+        showEmpty(
+          "데이터 로드에 실패했습니다.\n" +
+          "(data.js 경로 또는 문법 오류 가능)\n\n" +
+          "✅ 확인: verification/data.js 가 브라우저에서 열리는지 확인해주세요."
+        );
+      }
+    }, 50);
+  </script>
+</body>
+</html>
