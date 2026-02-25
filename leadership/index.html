@@ -6,8 +6,9 @@
   <title>IPMA | 임원 소개</title>
   <meta name="description" content="International Police Martial Arts Alliance(IPMA) 임원 소개" />
 
+  <!-- OG -->
   <meta property="og:title" content="IPMA | 임원 소개" />
-  <meta property="og:description" content="체계 >> 교차원리, 교차원리 기반 무도" />
+  <meta property="og:description" content="구조 >> 교차원리, 교차원리 기반 무도" />
   <meta property="og:type" content="website" />
 
   <style>
@@ -39,6 +40,7 @@
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:22px 16px 70px}
 
+    /* Top */
     .topbar{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; padding:14px 14px;
@@ -65,6 +67,8 @@
       margin:2px 0 0; font-size:12px; color:var(--muted);
       white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
+
+    .rightBox{display:flex; align-items:center; gap:10px; flex:0 0 auto;}
     .homeBtn{
       display:inline-flex; align-items:center; gap:8px;
       padding:10px 12px; border-radius:14px;
@@ -72,7 +76,6 @@
       background: rgba(255,255,255,.03);
       transition:.2s transform, .2s background;
       font-size:13px;
-      flex:0 0 auto;
     }
     .homeBtn:hover{transform: translateY(-1px); background: rgba(255,255,255,.06)}
     .dot{
@@ -81,6 +84,31 @@
       box-shadow: 0 0 0 4px rgba(90,167,255,.12);
     }
 
+    /* Lang toggle */
+    .toggle{
+      display:inline-flex;
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background: rgba(255,255,255,.02);
+    }
+    .tbtn{
+      appearance:none; border:0; margin:0;
+      padding:10px 12px;
+      font-size:12px;
+      color:var(--muted);
+      background: transparent;
+      cursor:pointer;
+      transition:.2s background, .2s color;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .tbtn:hover{background: rgba(255,255,255,.05)}
+    .tbtn.active{
+      color: var(--ink);
+      background: linear-gradient(180deg, rgba(216,177,90,.20), rgba(255,255,255,.02));
+    }
+
+    /* Hero */
     .hero{
       margin-top:18px;
       padding:22px 18px;
@@ -98,18 +126,15 @@
       font-size:12px;
     }
     .kicker b{color:var(--gold)}
-    .hero h2{margin:12px 0 6px; font-size:22px; letter-spacing:.2px;}
+    .hero h2{margin:12px 0 8px; font-size:22px; letter-spacing:.2px;}
     .hero .sub{margin:0; color:var(--muted); font-size:14px;}
 
+    /* ✅ Single layout */
     .grid{
       margin-top:16px;
       display:grid;
-      grid-template-columns: 1.35fr .65fr;
+      grid-template-columns: 1fr;
       gap:14px;
-    }
-    @media (max-width: 920px){
-      .grid{grid-template-columns:1fr}
-      .topbar{position:relative; top:auto}
     }
 
     .card{
@@ -124,6 +149,7 @@
       border-bottom:1px solid var(--line);
       background: rgba(0,0,0,.12);
       display:flex; align-items:center; justify-content:space-between; gap:12px;
+      flex-wrap:wrap;
     }
     .cardHead h3{margin:0; font-size:15px}
     .tag{
@@ -137,12 +163,34 @@
     }
     .cardBody{padding:14px 16px}
 
+    /* Controls */
+    .controls{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    }
+    .select{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color: var(--ink);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:12px;
+      outline:none;
+    }
+    .hint{
+      color: var(--muted);
+      font-size:12px;
+    }
+
+    /* Leader list */
     .leaders{
       display:grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap:12px;
     }
-    @media (max-width: 700px){ .leaders{grid-template-columns:1fr} }
+    @media (max-width: 720px){
+      .leaders{grid-template-columns:1fr}
+      .topbar{position:relative; top:auto}
+    }
 
     .person{
       display:flex; gap:12px; align-items:stretch;
@@ -163,7 +211,7 @@
       flex:0 0 auto;
     }
     .avatar img{width:100%; height:100%; object-fit:cover; display:block}
-    .pInfo{min-width:0; display:flex; flex-direction:column; gap:6px}
+    .pInfo{min-width:0; display:flex; flex-direction:column; gap:6px; flex:1}
     .pName{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
     .pName strong{font-size:15px}
     .pill{
@@ -194,36 +242,6 @@
       box-shadow: 0 0 0 4px rgba(90,167,255,.12);
     }
 
-    .asideList{display:flex; flex-direction:column; gap:10px}
-    .note{
-      padding:12px 12px;
-      border-radius:18px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.02);
-      color:var(--muted);
-      font-size:13px;
-    }
-    .note b{color:var(--gold)}
-    .mini{
-      display:grid;
-      gap:10px;
-      padding:12px;
-      border-radius:18px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.02);
-    }
-    .mini h4{margin:0; font-size:13px}
-    .mini p{margin:0; font-size:12px; color:var(--muted); line-height:1.6}
-    .mini code{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      color:#d6e6ff;
-      background: rgba(90,167,255,.12);
-      border:1px solid rgba(90,167,255,.22);
-      padding:2px 6px;
-      border-radius:8px;
-      font-size:11px;
-    }
-
     footer{
       margin-top:16px;
       color:var(--muted);
@@ -244,62 +262,49 @@
         <div class="mark"><span>IPMA</span></div>
         <div style="min-width:0">
           <h1>International Police Martial Arts Alliance</h1>
-          <p>임원 소개 · Leadership</p>
+          <p id="topSub">임원 소개 · Leadership</p>
         </div>
       </div>
-      <a class="homeBtn" href="../">
-        <span class="dot"></span>
-        홈으로
-      </a>
+
+      <div class="rightBox">
+        <div class="toggle" aria-label="Language">
+          <button class="tbtn active" id="btnKo" type="button">KO</button>
+          <button class="tbtn" id="btnEn" type="button">EN</button>
+        </div>
+        <a class="homeBtn" href="../">
+          <span class="dot"></span>
+          홈으로
+        </a>
+      </div>
     </div>
 
     <!-- Hero -->
     <section class="hero">
       <div class="kicker"><b>구조</b> >> 교차원리, 교차원리 기반 무도</div>
-      <h2>임원 소개</h2>
-      <p class="sub">IPMA의 운영과 발전을 함께하는 임원진을 소개합니다.</p>
+      <h2 id="heroTitle">임원 소개</h2>
+      <p class="sub" id="heroSub">
+        IPMA의 운영과 발전을 함께하는 임원진을 소개합니다.
+      </p>
     </section>
 
     <div class="grid">
 
-      <!-- Main -->
       <section class="card">
         <div class="cardHead">
-          <h3>임원진</h3>
-          <div class="tag">카드형 · 모바일 최적화</div>
+          <h3 id="sectionTitle">임원진</h3>
+          <div class="controls">
+            <select class="select" id="groupFilter" aria-label="filter">
+              <option value="ALL">전체 보기</option>
+            </select>
+            <span class="hint" id="hintText">직책 기준 자동 정렬 적용됨</span>
+            <div class="tag" id="tagText">Official · Auto Sort · KO/EN</div>
+          </div>
         </div>
+
         <div class="cardBody">
           <div id="leaders" class="leaders"></div>
         </div>
       </section>
-
-      <!-- Aside -->
-      <aside class="card">
-        <div class="cardHead">
-          <h3>관리 팁</h3>
-          <div class="tag">EDIT ZONE</div>
-        </div>
-        <div class="cardBody">
-          <div class="asideList">
-            <div class="note">
-              위 임원 정보는 아래 스크립트의 <b>EDIT ZONE</b>에서만 수정하면 됩니다.<br/>
-              사진 URL / 직책 / 약력 / 링크만 바꾸면 디자인은 그대로 유지돼요.
-            </div>
-
-            <div class="mini">
-              <h4>자주 바꾸는 곳</h4>
-              <p>1) 이름: <code>name</code> · 2) 직책: <code>title</code><br/>
-                 3) 겸임/소속: <code>lines</code> · 4) 사진: <code>photo</code><br/>
-                 5) SNS/링크: <code>links</code></p>
-            </div>
-
-            <div class="mini">
-              <h4>표현 스타일</h4>
-              <p>한 사람당 약력은 2~4줄이 가장 보기 좋습니다.<br/>너무 길면 카드가 “벌크업” 돼요 😄</p>
-            </div>
-          </div>
-        </div>
-      </aside>
 
     </div>
 
@@ -311,17 +316,26 @@
   </div>
 
   <script>
-    // =========================
-    // ✅ EDIT ZONE (여기만 수정!)
-    // =========================
+    // =========================================================
+    // ✅ EDIT ZONE (여기만 수정하면 됩니다)
+    // - titleKo/titleEn, groupKo/groupEn, linesKo/linesEn, links
+    // - 직책 자동 정렬은 rankKey(한글 직책 문자열)에 따라 동작합니다.
+    // =========================================================
     const LEADERS = [
       {
-        name: "전성권",
-        title: "국제경찰무도연합회 명예총재 / 이사장",
+        nameKo: "전성권",
+        nameEn: "Seong Kweon Jeon",
+        titleKo: "국제경찰무도연합회 명예총재 / 이사장",
+        titleEn: "Honorary President / Chair",
+        rankKey: "명예총재/이사장",
+        groupKo: "명예총재단",
+        groupEn: "Honorary Leadership",
         photo: "https://static.wixstatic.com/media/abf917_49a488c860b4472aa29a13bd256bb340~mv2.jpg",
-        badge: ["Honorary President", "Chair"],
-        lines: [
+        linesKo: [
           "세계태권검도연맹 명예총재 / 이사장"
+        ],
+        linesEn: [
+          "Honorary President / Chair of WTKA"
         ],
         links: [
           { label: "Facebook", url: "https://www.facebook.com/seongkweon.jeon" },
@@ -329,104 +343,193 @@
         ]
       },
       {
-        name: "김영준",
-        title: "세계태권검도연맹 총재",
+        nameKo: "김영준",
+        nameEn: "Young Jun Kim",
+        titleKo: "세계태권검도연맹 총재",
+        titleEn: "President of WTKA",
+        rankKey: "총재",
+        groupKo: "총재단",
+        groupEn: "Presidency",
         photo: "https://static.wixstatic.com/media/abf917_a77678bd178c49b2b6f6a9755c046e43~mv2.jpg",
-        badge: ["President"],
-        lines: [
+        linesKo: [
           "국제경찰무도연합회 최고위원"
         ],
-        links: []
-      },
-      {
-        name: "임건태",
-        title: "국제경찰무도연합회 총재",
-        photo: "https://static.wixstatic.com/media/abf917_6bb6136317f34ed9add8632d9b0f828a~mv2.jpg",
-        badge: ["President"],
-        lines: [
-          "세계태권검도연맹 최고위원"
+        linesEn: [
+          "Supreme Council Member of IPMA"
         ],
         links: []
       },
       {
-        name: "전기홍",
-        title: "경찰무도연수원장",
+        nameKo: "임건태",
+        nameEn: "Geon Tae Lim",
+        titleKo: "국제경찰무도연합회 총재",
+        titleEn: "President of IPMA",
+        rankKey: "총재",
+        groupKo: "총재단",
+        groupEn: "Presidency",
+        photo: "https://static.wixstatic.com/media/abf917_6bb6136317f34ed9add8632d9b0f828a~mv2.jpg",
+        linesKo: [
+          "세계태권검도연맹 최고위원"
+        ],
+        linesEn: [
+          "Supreme Council Member of WTKA"
+        ],
+        links: []
+      },
+      {
+        nameKo: "전기홍",
+        nameEn: "Gi Hong Jeon",
+        titleKo: "경찰무도연수원장",
+        titleEn: "Director of Police Martial Arts Training Institute",
+        rankKey: "원장",
+        groupKo: "연수원",
+        groupEn: "Training Institute",
         photo: "https://static.wixstatic.com/media/abf917_553abf0f663d412dbd01a820fcbe154a~mv2.jpg",
-        badge: ["Director"],
-        lines: [
+        linesKo: [
           "UMBS 호신술 창시자"
         ],
-        links: []
-      },
-      {
-        name: "한승원",
-        title: "국제경찰무도연합회 이사",
-        photo: "https://static.wixstatic.com/media/abf917_4399735b0fa44390801f4022cead0a96~mv2.jpg",
-        badge: ["Board Member"],
-        lines: [
-          "세계태권검도연맹 이사"
+        linesEn: [
+          "Founder of UMBS Self-Defense"
         ],
         links: []
       },
       {
-        name: "조창진",
-        title: "국제경찰무도연합회 이사",
-        photo: "https://static.wixstatic.com/media/abf917_305185d312944e08a249c54efd22fecf~mv2.jpg",
-        badge: ["Board Member"],
-        lines: [
-          "세계태권검도연맹 이사"
-        ],
-        links: []
-      },
-      {
-        name: "우종천",
-        title: "국제경찰무도연합회 이사",
-        photo: "https://static.wixstatic.com/media/abf917_7689467cca03431dbdf3c2c80e6fa9df~mv2.jpg",
-        badge: ["Board Member"],
-        lines: [
-          "세계태권검도연맹 이사"
-        ],
-        links: []
-      },
-      {
-        name: "박병호",
-        title: "국제경찰무도연합회 이사",
-        photo: "https://static.wixstatic.com/media/abf917_da0b306f3ae74c95b6f5d337ab6fad34~mv2.jpg",
-        badge: ["Board Member"],
-        lines: [
-          "세계태권검도연맹 최고위원"
-        ],
-        links: []
-      },
-      {
-        name: "박종태",
-        title: "국제경찰무도연합회 이사",
+        nameKo: "박종태",
+        nameEn: "Jong Tae Park",
+        titleKo: "국제경찰무도연합회 이사",
+        titleEn: "Board Member of IPMA",
+        rankKey: "부총재",
+        groupKo: "이사회",
+        groupEn: "Board",
         photo: "https://static.wixstatic.com/media/abf917_cfdaf008ac9947ca8208aaf7a3218c1a~mv2.jpg",
-        badge: ["Board Member"],
-        lines: [
+        linesKo: [
           "세계태권검도연맹 부총재"
         ],
+        linesEn: [
+          "Vice President of WTKA"
+        ],
         links: []
       },
       {
-        name: "김요환",
-        title: "국제경찰무도연합회 이사",
+        nameKo: "박병호",
+        nameEn: "Byeong Ho Park",
+        titleKo: "국제경찰무도연합회 이사",
+        titleEn: "Board Member of IPMA",
+        rankKey: "최고위원",
+        groupKo: "이사회",
+        groupEn: "Board",
+        photo: "https://static.wixstatic.com/media/abf917_da0b306f3ae74c95b6f5d337ab6fad34~mv2.jpg",
+        linesKo: [
+          "세계태권검도연맹 최고위원"
+        ],
+        linesEn: [
+          "Supreme Council Member of WTKA"
+        ],
+        links: []
+      },
+      {
+        nameKo: "한승원",
+        nameEn: "Seung Won Han",
+        titleKo: "국제경찰무도연합회 이사",
+        titleEn: "Board Member of IPMA",
+        rankKey: "이사",
+        groupKo: "이사회",
+        groupEn: "Board",
+        photo: "https://static.wixstatic.com/media/abf917_4399735b0fa44390801f4022cead0a96~mv2.jpg",
+        linesKo: [
+          "세계태권검도연맹 이사"
+        ],
+        linesEn: [
+          "Board Member of WTKA"
+        ],
+        links: []
+      },
+      {
+        nameKo: "조창진",
+        nameEn: "Chang Jin Jo",
+        titleKo: "국제경찰무도연합회 이사",
+        titleEn: "Board Member of IPMA",
+        rankKey: "이사",
+        groupKo: "이사회",
+        groupEn: "Board",
+        photo: "https://static.wixstatic.com/media/abf917_305185d312944e08a249c54efd22fecf~mv2.jpg",
+        linesKo: [
+          "세계태권검도연맹 이사"
+        ],
+        linesEn: [
+          "Board Member of WTKA"
+        ],
+        links: []
+      },
+      {
+        nameKo: "우종천",
+        nameEn: "Jong Cheon Woo",
+        titleKo: "국제경찰무도연합회 이사",
+        titleEn: "Board Member of IPMA",
+        rankKey: "이사",
+        groupKo: "이사회",
+        groupEn: "Board",
+        photo: "https://static.wixstatic.com/media/abf917_7689467cca03431dbdf3c2c80e6fa9df~mv2.jpg",
+        linesKo: [
+          "세계태권검도연합회 이사"
+        ],
+        linesEn: [
+          "Board Member of WTKA"
+        ],
+        links: []
+      },
+      {
+        nameKo: "김요환",
+        nameEn: "Yo Hwan Kim",
+        titleKo: "국제경찰무도연합회 이사",
+        titleEn: "Board Member of IPMA",
+        rankKey: "이사",
+        groupKo: "이사회",
+        groupEn: "Board",
         photo: "https://static.wixstatic.com/media/abf917_66d6044417e64126b033c359dfef5a5d~mv2.jpg",
-        badge: ["Board Member"],
-        lines: [
+        linesKo: [
           "해군 하사관 근무"
+        ],
+        linesEn: [
+          "Navy NCO Service"
         ],
         links: []
       }
     ];
-    // =========================
+    // =========================================================
     // ✅ EDIT ZONE 끝
-    // =========================
+    // =========================================================
+
+    // 직책 우선순위(낮을수록 위)
+    const RANK_ORDER = {
+      "명예총재/이사장": 0,
+      "명예총재": 1,
+      "이사장": 2,
+      "총재": 3,
+      "원장": 4,
+      "최고위원": 5,
+      "부총재": 6,
+      "이사": 7,
+      "기타": 99
+    };
 
     const $leaders = document.getElementById("leaders");
+    const $year = document.getElementById("year");
+    const $groupFilter = document.getElementById("groupFilter");
+    const $btnKo = document.getElementById("btnKo");
+    const $btnEn = document.getElementById("btnEn");
+
+    const $topSub = document.getElementById("topSub");
+    const $heroTitle = document.getElementById("heroTitle");
+    const $heroSub = document.getElementById("heroSub");
+    const $sectionTitle = document.getElementById("sectionTitle");
+    const $hintText = document.getElementById("hintText");
+    const $tagText = document.getElementById("tagText");
+
+    let LANG = "ko"; // 'ko' | 'en'
 
     function escapeHtml(s){
-      return String(s)
+      return String(s ?? "")
         .replaceAll("&","&amp;")
         .replaceAll("<","&lt;")
         .replaceAll(">","&gt;")
@@ -434,13 +537,30 @@
         .replaceAll("'","&#039;");
     }
 
-    function renderBadge(badgeArr){
-      if(!badgeArr || !badgeArr.length) return "";
-      return badgeArr.map(b => `<span class="pill">${escapeHtml(b)}</span>`).join("");
+    function getRankScore(p){
+      const key = (p.rankKey || "").trim();
+      return (key in RANK_ORDER) ? RANK_ORDER[key] : RANK_ORDER["기타"];
+    }
+
+    function getGroup(p){
+      return LANG === "ko" ? (p.groupKo || "기타") : (p.groupEn || "Others");
+    }
+
+    function getName(p){
+      return LANG === "ko" ? (p.nameKo || "") : (p.nameEn || p.nameKo || "");
+    }
+
+    function getTitle(p){
+      return LANG === "ko" ? (p.titleKo || "") : (p.titleEn || p.titleKo || "");
+    }
+
+    function getLines(p){
+      const arr = LANG === "ko" ? (p.linesKo || []) : (p.linesEn || p.linesKo || []);
+      return Array.isArray(arr) ? arr : [];
     }
 
     function renderLines(lines){
-      if(!lines || !lines.length) return "";
+      if(!lines.length) return "";
       return lines.map(l => `<div>• ${escapeHtml(l)}</div>`).join("");
     }
 
@@ -457,20 +577,29 @@
       `;
     }
 
+    function badgeFromRank(rankKey){
+      // 공식 느낌을 위해 직책키를 뱃지로도 표시(너무 과하면 줄여도 됨)
+      const label = LANG === "ko" ? rankKey : rankKey; // rankKey는 내부키라 그대로 사용(원하면 영어로 따로 매핑 가능)
+      return label ? `<span class="pill">${escapeHtml(label)}</span>` : "";
+    }
+
     function card(p){
+      const name = getName(p);
+      const title = getTitle(p);
+      const lines = getLines(p);
       return `
-        <article class="person">
+        <article class="person" data-group="${escapeHtml(getGroup(p))}">
           <div class="avatar">
-            <img src="${escapeHtml(p.photo)}" alt="${escapeHtml(p.name)}" loading="lazy" />
+            <img src="${escapeHtml(p.photo)}" alt="${escapeHtml(name)}" loading="lazy" />
           </div>
           <div class="pInfo">
             <div class="pName">
-              <strong>${escapeHtml(p.name)}</strong>
-              ${renderBadge(p.badge)}
+              <strong>${escapeHtml(name)}</strong>
+              ${badgeFromRank(p.rankKey || "")}
             </div>
-            <div class="role">${escapeHtml(p.title)}</div>
+            <div class="role">${escapeHtml(title)}</div>
             <div class="meta">
-              ${renderLines(p.lines)}
+              ${renderLines(lines)}
             </div>
             ${renderLinks(p.links)}
           </div>
@@ -478,8 +607,70 @@
       `;
     }
 
-    $leaders.innerHTML = LEADERS.map(card).join("");
-    document.getElementById("year").textContent = new Date().getFullYear();
+    function buildGroupOptions(data){
+      const groups = Array.from(new Set(data.map(getGroup))).filter(Boolean);
+      groups.sort((a,b)=>a.localeCompare(b));
+      $groupFilter.innerHTML = `
+        <option value="ALL">${LANG==="ko" ? "전체 보기" : "Show All"}</option>
+        ${groups.map(g => `<option value="${escapeHtml(g)}">${escapeHtml(g)}</option>`).join("")}
+      `;
+    }
+
+    function applyFilter(){
+      const v = $groupFilter.value;
+      const cards = $leaders.querySelectorAll(".person");
+      cards.forEach(el => {
+        const g = el.getAttribute("data-group") || "";
+        el.style.display = (v==="ALL" || g===v) ? "" : "none";
+      });
+    }
+
+    function render(){
+      // 직책 우선순위 + 같은 우선순위는 이름 기준
+      const sorted = [...LEADERS].sort((a,b)=>{
+        const da = getRankScore(a) - getRankScore(b);
+        if(da !== 0) return da;
+        return getName(a).localeCompare(getName(b));
+      });
+
+      buildGroupOptions(sorted);
+      $leaders.innerHTML = sorted.map(card).join("");
+      $groupFilter.value = "ALL";
+      applyFilter();
+
+      // 문구 (KO/EN)
+      if(LANG === "ko"){
+        $topSub.textContent = "임원 소개 · Leadership";
+        $heroTitle.textContent = "임원 소개";
+        $heroSub.textContent = "IPMA의 운영과 발전을 함께하는 임원진을 소개합니다.";
+        $sectionTitle.textContent = "임원진";
+        $hintText.textContent = "직책 기준 자동 정렬 적용됨";
+        $tagText.textContent = "Official · Auto Sort · KO/EN";
+        document.title = "IPMA | 임원 소개";
+      }else{
+        $topSub.textContent = "Leadership";
+        $heroTitle.textContent = "Leadership";
+        $heroSub.textContent = "Meet the leadership team supporting IPMA's mission and growth.";
+        $sectionTitle.textContent = "Leadership Team";
+        $hintText.textContent = "Auto-sorted by role priority";
+        $tagText.textContent = "Official · Auto Sort · KO/EN";
+        document.title = "IPMA | Leadership";
+      }
+    }
+
+    function setLang(next){
+      LANG = next;
+      $btnKo.classList.toggle("active", LANG==="ko");
+      $btnEn.classList.toggle("active", LANG==="en");
+      render();
+    }
+
+    $groupFilter.addEventListener("change", applyFilter);
+    $btnKo.addEventListener("click", ()=>setLang("ko"));
+    $btnEn.addEventListener("click", ()=>setLang("en"));
+
+    $year.textContent = new Date().getFullYear();
+    render();
   </script>
 </body>
 </html>
