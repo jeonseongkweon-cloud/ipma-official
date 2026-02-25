@@ -1,22 +1,206 @@
-<main class="container">
-  <header class="page-head">
-    <h1>국제 인증 · 자격</h1>
-    <p class="lead">
-      IPMA 인증은 “안전 + 재현성 + 책임”을 기준으로, 지도자 역량을 단계별로 확인합니다.
-    </p>
-  </header>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>IPMA | 국제 인증 · 자격</title>
+  <meta name="description" content="IPMA 국제 인증 체계. 안전 · 재현성 · 책임 기반 지도자 단계별 검증 시스템." />
 
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a30;
+      --ink:#eaf0ff;
+      --muted:#a9b6d3;
+      --line:rgba(255,255,255,.10);
+      --gold:#d8b15a;
+      --blue:#5aa7ff;
+      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:26px;
+      --max: 1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+      background:
+        radial-gradient(1200px 700px at 20% 0%, rgba(90,167,255,.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 10%, rgba(216,177,90,.14), transparent 55%),
+        var(--bg);
+      color:var(--ink);
+      line-height:1.6;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px 16px 70px}
+
+    /* ===== Top Bar ===== */
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      position:sticky;
+      top:10px;
+      backdrop-filter:blur(10px);
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;
+    }
+    .mark{
+      width:40px;height:40px;
+      border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,rgba(216,177,90,.3),rgba(90,167,255,.2));
+      border:1px solid var(--line);
+      font-weight:800;
+      color:var(--gold);
+    }
+    .homeBtn{
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:13px;
+      transition:.2s;
+    }
+    .homeBtn:hover{
+      background:rgba(255,255,255,.07);
+      transform:translateY(-2px);
+    }
+
+    /* ===== Hero ===== */
+    .hero{
+      margin-top:20px;
+      padding:28px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-size:26px;
+    }
+    .hero p{
+      margin:0;
+      color:var(--muted);
+    }
+    .kicker{
+      font-size:12px;
+      color:var(--gold);
+      margin-bottom:8px;
+      font-weight:600;
+    }
+
+    /* ===== Cards ===== */
+    .card{
+      margin-top:20px;
+      padding:22px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+    }
+
+    .grid4{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+    @media(max-width:850px){
+      .grid4{grid-template-columns:1fr}
+    }
+
+    h2{
+      margin-top:0;
+      color:var(--gold);
+    }
+    h3{
+      margin-bottom:8px;
+      color:#fff;
+    }
+
+    ul{margin:0;padding-left:18px}
+    li{margin:6px 0}
+
+    .muted{color:var(--muted);font-size:13px;margin-top:12px}
+
+    /* ===== Buttons ===== */
+    .actions{
+      margin-top:24px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    .btn{
+      padding:11px 16px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:14px;
+      transition:.2s;
+    }
+    .btn:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.08);
+    }
+    .primary{
+      background:linear-gradient(135deg,var(--gold),#a88936);
+      color:#111;
+      font-weight:600;
+      border:none;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- 상단 -->
+  <div class="topbar">
+    <div class="brand">
+      <div class="mark">IPMA</div>
+      <div>
+        <strong>International Police Martial Arts Alliance</strong><br>
+        <span style="font-size:12px;color:var(--muted)">국제 인증 · 자격 시스템</span>
+      </div>
+    </div>
+    <a class="homeBtn" href="../index.html">홈으로</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="kicker">구조 >> 교차원리, 교차원리 기반 무도</div>
+    <h1>국제 인증 · 자격</h1>
+    <p>
+      IPMA 인증은 “안전 + 재현성 + 책임”을 기준으로, 
+      지도자의 전문성과 운영 능력을 단계별로 검증하는 국제 표준 시스템입니다.
+    </p>
+  </section>
+
+  <!-- 인증 체계 -->
   <section class="card">
-    <h2>인증 체계(예시)</h2>
-    <div class="grid2">
+    <h2>인증 단계 체계</h2>
+
+    <div class="grid4">
+
       <div>
         <h3>Instructor Level 1</h3>
         <ul>
-          <li>기본 안전 규정</li>
+          <li>기본 안전 규정 숙지</li>
           <li>기본 동작 구조 이해</li>
-          <li>기본 지도/보조 지도 가능</li>
+          <li>보조 지도 가능</li>
         </ul>
       </div>
+
       <div>
         <h3>Instructor Level 2</h3>
         <ul>
@@ -25,6 +209,7 @@
           <li>세미나 보조 진행</li>
         </ul>
       </div>
+
       <div>
         <h3>Instructor Level 3</h3>
         <ul>
@@ -33,31 +218,40 @@
           <li>안전·윤리 감독</li>
         </ul>
       </div>
+
       <div>
         <h3>Master / Director</h3>
         <ul>
           <li>지부/기관 운영</li>
           <li>국제 교류 총괄</li>
-          <li>표준화·심사 체계 구축</li>
+          <li>표준화 및 심사 체계 구축</li>
         </ul>
       </div>
+
     </div>
-    <p class="muted">※ 단계명/요건은 운영 정책에 따라 조정 가능합니다.</p>
+
+    <p class="muted">※ 단계명 및 요건은 운영 정책에 따라 조정될 수 있습니다.</p>
   </section>
 
+  <!-- 심사 기준 -->
   <section class="card">
-    <h2>심사/발급 기준</h2>
+    <h2>심사 · 발급 기준</h2>
     <ul>
-      <li>안전 운영 능력(부상 예방, 보호장비, 훈련 통제)</li>
-      <li>지도 능력(설명·시범·피드백, 수련생 관리)</li>
-      <li>기술 이해(구조 &gt;&gt; 교차원리 기반의 동작 원리 적용)</li>
-      <li>윤리/책임(지도자 품행, 기관 운영 준수)</li>
+      <li>안전 운영 능력 (부상 예방 · 보호장비 · 훈련 통제)</li>
+      <li>지도 능력 (설명 · 시범 · 피드백 · 수련생 관리)</li>
+      <li>기술 이해 (구조 >> 교차원리 기반 동작 원리 적용)</li>
+      <li>윤리 · 책임 (지도자 품행 및 기관 운영 준수)</li>
     </ul>
   </section>
 
+  <!-- 버튼 -->
   <div class="actions">
     <a class="btn primary" href="../verification/index.html">자격 조회하기</a>
     <a class="btn" href="../contact/index.html">인증 문의</a>
     <a class="btn" href="../index.html">홈으로</a>
   </div>
-</main>
+
+</div>
+
+</body>
+</html>
