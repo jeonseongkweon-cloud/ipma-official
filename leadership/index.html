@@ -1,33 +1,485 @@
-<main class="container">
-  <header class="page-head">
-    <h1>임원진</h1>
-    <p class="lead">IPMA는 책임·윤리·공공성을 바탕으로 운영됩니다.</p>
-  </header>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>IPMA | 임원 소개</title>
+  <meta name="description" content="International Police Martial Arts Alliance(IPMA) 임원 소개" />
 
-  <section class="card">
-    <h2>조직 구성(예시)</h2>
-    <ul>
-      <li><strong>총재</strong>: (성명)</li>
-      <li><strong>부총재</strong>: (성명)</li>
-      <li><strong>사무총장</strong>: (성명)</li>
-      <li><strong>기술위원장</strong>: (성명)</li>
-      <li><strong>심사위원장</strong>: (성명)</li>
-      <li><strong>국제협력위원</strong>: (국가/성명)</li>
-    </ul>
-    <p class="muted">※ 실제 명단은 확정되는 대로 업데이트됩니다.</p>
-  </section>
+  <meta property="og:title" content="IPMA | 임원 소개" />
+  <meta property="og:description" content="구조 >> 교차원리, 교차원리 기반 무도" />
+  <meta property="og:type" content="website" />
 
-  <section class="card">
-    <h2>운영 원칙</h2>
-    <ul>
-      <li>안전 최우선</li>
-      <li>투명한 인증·기록 관리</li>
-      <li>국가/기관/도장 간 상호 존중</li>
-    </ul>
-  </section>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a30;
+      --ink:#eaf0ff;
+      --muted:#a9b6d3;
+      --line:rgba(255,255,255,.10);
+      --gold:#d8b15a;
+      --blue:#5aa7ff;
+      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:26px;
+      --max: 1120px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background:
+        radial-gradient(1200px 700px at 20% 0%, rgba(90,167,255,.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 10%, rgba(216,177,90,.14), transparent 55%),
+        var(--bg);
+      color:var(--ink);
+      line-height:1.55;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 16px 70px}
 
-  <div class="actions">
-    <a class="btn primary" href="../contact/index.html">임원/협력 문의</a>
-    <a class="btn" href="../index.html">홈으로</a>
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:14px 14px;
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      position:sticky; top:10px; z-index:20;
+      backdrop-filter: blur(10px);
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:0;}
+    .mark{
+      width:44px; height:44px; border-radius:14px;
+      border:1px solid var(--line);
+      background: linear-gradient(135deg, rgba(216,177,90,.22), rgba(90,167,255,.16));
+      display:grid; place-items:center; flex:0 0 auto;
+    }
+    .mark span{font-weight:900; letter-spacing:.5px; color:var(--gold);}
+    .brand h1{
+      margin:0; font-size:16px; letter-spacing:.2px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .brand p{
+      margin:2px 0 0; font-size:12px; color:var(--muted);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .homeBtn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      transition:.2s transform, .2s background;
+      font-size:13px;
+      flex:0 0 auto;
+    }
+    .homeBtn:hover{transform: translateY(-1px); background: rgba(255,255,255,.06)}
+    .dot{
+      width:8px; height:8px; border-radius:50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 4px rgba(90,167,255,.12);
+    }
+
+    .hero{
+      margin-top:18px;
+      padding:22px 18px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:7px 11px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-size:12px;
+    }
+    .kicker b{color:var(--gold)}
+    .hero h2{margin:12px 0 6px; font-size:22px; letter-spacing:.2px;}
+    .hero .sub{margin:0; color:var(--muted); font-size:14px;}
+
+    .grid{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:14px;
+    }
+    @media (max-width: 920px){
+      .grid{grid-template-columns:1fr}
+      .topbar{position:relative; top:auto}
+    }
+
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .cardHead{
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      background: rgba(0,0,0,.12);
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .cardHead h3{margin:0; font-size:15px}
+    .tag{
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding:6px 10px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+    .cardBody{padding:14px 16px}
+
+    .leaders{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:12px;
+    }
+    @media (max-width: 700px){ .leaders{grid-template-columns:1fr} }
+
+    .person{
+      display:flex; gap:12px; align-items:stretch;
+      padding:14px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      transition:.2s transform, .2s border;
+      min-height: 126px;
+    }
+    .person:hover{transform: translateY(-2px); border-color: rgba(216,177,90,.35)}
+    .avatar{
+      width:82px; height:98px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .avatar img{width:100%; height:100%; object-fit:cover; display:block}
+    .pInfo{min-width:0; display:flex; flex-direction:column; gap:6px}
+    .pName{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+    .pName strong{font-size:15px}
+    .pill{
+      font-size:11px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      color:var(--muted);
+      background: rgba(255,255,255,.02);
+      white-space:nowrap;
+    }
+    .role{color:var(--gold); font-size:13px}
+    .meta{color:var(--muted); font-size:12px; display:flex; flex-direction:column; gap:3px}
+    .links{display:flex; gap:8px; flex-wrap:wrap; margin-top:auto}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      transition:.2s transform, .2s background;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.06)}
+    .btn .ico{
+      width:8px; height:8px; border-radius:50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 4px rgba(90,167,255,.12);
+    }
+
+    .asideList{display:flex; flex-direction:column; gap:10px}
+    .note{
+      padding:12px 12px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .note b{color:var(--gold)}
+    .mini{
+      display:grid;
+      gap:10px;
+      padding:12px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+    }
+    .mini h4{margin:0; font-size:13px}
+    .mini p{margin:0; font-size:12px; color:var(--muted); line-height:1.6}
+    .mini code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      color:#d6e6ff;
+      background: rgba(90,167,255,.12);
+      border:1px solid rgba(90,167,255,.22);
+      padding:2px 6px;
+      border-radius:8px;
+      font-size:11px;
+    }
+
+    footer{
+      margin-top:16px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      opacity:.95;
+    }
+    .line{margin:12px auto 0; max-width:560px; height:1px; background: var(--line);}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Top -->
+    <div class="topbar">
+      <div class="brand">
+        <div class="mark"><span>IPMA</span></div>
+        <div style="min-width:0">
+          <h1>International Police Martial Arts Alliance</h1>
+          <p>임원 소개 · Leadership</p>
+        </div>
+      </div>
+      <a class="homeBtn" href="../">
+        <span class="dot"></span>
+        홈으로
+      </a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="kicker"><b>구조</b> >> 교차원리, 교차원리 기반 무도</div>
+      <h2>임원 소개</h2>
+      <p class="sub">IPMA의 운영과 발전을 함께하는 임원진을 소개합니다. (사진·직책·약력은 언제든 업데이트 가능합니다)</p>
+    </section>
+
+    <div class="grid">
+
+      <!-- Main -->
+      <section class="card">
+        <div class="cardHead">
+          <h3>임원진</h3>
+          <div class="tag">카드형 · 모바일 최적화</div>
+        </div>
+        <div class="cardBody">
+          <div id="leaders" class="leaders"></div>
+        </div>
+      </section>
+
+      <!-- Aside -->
+      <aside class="card">
+        <div class="cardHead">
+          <h3>관리 팁</h3>
+          <div class="tag">EDIT ZONE</div>
+        </div>
+        <div class="cardBody">
+          <div class="asideList">
+            <div class="note">
+              위 임원 정보는 아래 스크립트의 <b>EDIT ZONE</b>에서만 수정하면 됩니다.<br/>
+              사진 URL / 직책 / 약력 / 링크만 바꾸면 디자인은 그대로 유지돼요.
+            </div>
+
+            <div class="mini">
+              <h4>자주 바꾸는 곳</h4>
+              <p>1) 이름: <code>name</code> · 2) 직책: <code>title</code><br/>
+                 3) 겸임/소속: <code>lines</code> · 4) 사진: <code>photo</code><br/>
+                 5) SNS/링크: <code>links</code></p>
+            </div>
+
+            <div class="mini">
+              <h4>표현 스타일</h4>
+              <p>한 사람당 약력은 2~4줄이 가장 보기 좋습니다.<br/>너무 길면 카드가 “벌크업” 돼요 😄</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <footer>
+      <div class="line"></div>
+      <p>© <span id="year"></span> IPMA · International Police Martial Arts Alliance</p>
+    </footer>
+
   </div>
-</main>
+
+  <script>
+    // =========================
+    // ✅ EDIT ZONE (여기만 수정!)
+    // =========================
+    const LEADERS = [
+      {
+        name: "전성권",
+        title: "국제경찰무도연합회 명예총재 / 이사장",
+        photo: "https://static.wixstatic.com/media/abf917_49a488c860b4472aa29a13bd256bb340~mv2.jpg",
+        badge: ["Honorary President", "Chair"],
+        lines: [
+          "세계태권검도연맹 명예총재 / 이사장"
+        ],
+        links: [
+          { label: "Facebook", url: "https://www.facebook.com/seongkweon.jeon" },
+          { label: "YouTube", url: "https://www.youtube.com/@globalnews24official" }
+        ]
+      },
+      {
+        name: "김영준",
+        title: "세계태권검도연맹 총재",
+        photo: "https://static.wixstatic.com/media/abf917_a77678bd178c49b2b6f6a9755c046e43~mv2.jpg",
+        badge: ["President"],
+        lines: [
+          "국제경찰무도연합회 최고위원"
+        ],
+        links: []
+      },
+      {
+        name: "임건태",
+        title: "국제경찰무도연합회 총재",
+        photo: "https://static.wixstatic.com/media/abf917_6bb6136317f34ed9add8632d9b0f828a~mv2.jpg",
+        badge: ["President"],
+        lines: [
+          "세계태권검도연맹 최고위원"
+        ],
+        links: []
+      },
+      {
+        name: "전기홍",
+        title: "경찰무도연수원장",
+        photo: "https://static.wixstatic.com/media/abf917_553abf0f663d412dbd01a820fcbe154a~mv2.jpg",
+        badge: ["Director"],
+        lines: [
+          "UMBS 호신술 창시자"
+        ],
+        links: []
+      },
+      {
+        name: "한승원",
+        title: "국제경찰무도연합회 이사",
+        photo: "https://static.wixstatic.com/media/abf917_4399735b0fa44390801f4022cead0a96~mv2.jpg",
+        badge: ["Board Member"],
+        lines: [
+          "세계태권검도연맹 이사"
+        ],
+        links: []
+      },
+      {
+        name: "조창진",
+        title: "국제경찰무도연합회 이사",
+        photo: "https://static.wixstatic.com/media/abf917_305185d312944e08a249c54efd22fecf~mv2.jpg",
+        badge: ["Board Member"],
+        lines: [
+          "세계태권검도연맹 이사"
+        ],
+        links: []
+      },
+      {
+        name: "우종천",
+        title: "국제경찰무도연합회 이사",
+        photo: "https://static.wixstatic.com/media/abf917_7689467cca03431dbdf3c2c80e6fa9df~mv2.jpg",
+        badge: ["Board Member"],
+        lines: [
+          "세계태권검도연맹 이사"
+        ],
+        links: []
+      },
+      {
+        name: "박병호",
+        title: "국제경찰무도연합회 이사",
+        photo: "https://static.wixstatic.com/media/abf917_da0b306f3ae74c95b6f5d337ab6fad34~mv2.jpg",
+        badge: ["Board Member"],
+        lines: [
+          "세계태권검도연맹 최고위원"
+        ],
+        links: []
+      },
+      {
+        name: "박종태",
+        title: "국제경찰무도연합회 이사",
+        photo: "https://static.wixstatic.com/media/abf917_cfdaf008ac9947ca8208aaf7a3218c1a~mv2.jpg",
+        badge: ["Board Member"],
+        lines: [
+          "세계태권검도연맹 부총재"
+        ],
+        links: []
+      },
+      {
+        name: "김요환",
+        title: "국제경찰무도연합회 이사",
+        photo: "https://static.wixstatic.com/media/abf917_66d6044417e64126b033c359dfef5a5d~mv2.jpg",
+        badge: ["Board Member"],
+        lines: [
+          "해군 하사관 근무"
+        ],
+        links: []
+      }
+    ];
+    // =========================
+    // ✅ EDIT ZONE 끝
+    // =========================
+
+    const $leaders = document.getElementById("leaders");
+
+    function escapeHtml(s){
+      return String(s)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function renderBadge(badgeArr){
+      if(!badgeArr || !badgeArr.length) return "";
+      return badgeArr.map(b => `<span class="pill">${escapeHtml(b)}</span>`).join("");
+    }
+
+    function renderLines(lines){
+      if(!lines || !lines.length) return "";
+      return lines.map(l => `<div>• ${escapeHtml(l)}</div>`).join("");
+    }
+
+    function renderLinks(links){
+      if(!links || !links.length) return "";
+      return `
+        <div class="links">
+          ${links.map(x => `
+            <a class="btn" href="${escapeHtml(x.url)}" target="_blank" rel="noopener">
+              <span class="ico"></span>${escapeHtml(x.label)}
+            </a>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function card(p){
+      return `
+        <article class="person">
+          <div class="avatar">
+            <img src="${escapeHtml(p.photo)}" alt="${escapeHtml(p.name)}" loading="lazy" />
+          </div>
+          <div class="pInfo">
+            <div class="pName">
+              <strong>${escapeHtml(p.name)}</strong>
+              ${renderBadge(p.badge)}
+            </div>
+            <div class="role">${escapeHtml(p.title)}</div>
+            <div class="meta">
+              ${renderLines(p.lines)}
+            </div>
+            ${renderLinks(p.links)}
+          </div>
+        </article>
+      `;
+    }
+
+    $leaders.innerHTML = LEADERS.map(card).join("");
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
