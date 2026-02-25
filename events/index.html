@@ -1,26 +1,569 @@
-<main class="container">
-  <header class="page-head">
-    <h1>행사 · 세미나</h1>
-    <p class="lead">국내·해외 세미나, 지도자 과정, 협력 행사 소식을 안내합니다.</p>
-  </header>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>IPMA | 행사 · 세미나</title>
+  <meta name="description" content="국내·해외 세미나, 지도자 과정, 협력 행사 소식 안내. 참가 문의 및 신청 정보 제공." />
 
-  <section class="card">
-    <h2>진행 예정(예시)</h2>
-    <div class="list">
-      <div class="list-item">
-        <strong>(날짜)</strong> · (지역) · 지도자 세미나 · (주제)
-        <div class="muted">대상: (지도자/수련생) · 신청: 문의 페이지</div>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a30;
+      --ink:#eaf0ff;
+      --muted:#a9b6d3;
+      --line:rgba(255,255,255,.10);
+      --gold:#d8b15a;
+      --blue:#5aa7ff;
+      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:26px;
+      --max: 1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+      background:
+        radial-gradient(1200px 700px at 20% 0%, rgba(90,167,255,.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 10%, rgba(216,177,90,.14), transparent 55%),
+        var(--bg);
+      color:var(--ink);
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px 16px 70px}
+
+    /* Top */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      position:sticky; top:10px; z-index:20;
+      backdrop-filter: blur(10px);
+    }
+    .brand{display:flex;align-items:center;gap:10px;min-width:0}
+    .mark{
+      width:40px;height:40px;border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,rgba(216,177,90,.30),rgba(90,167,255,.20));
+      border:1px solid var(--line);
+      font-weight:900;color:var(--gold);
+      flex:0 0 auto;
+    }
+    .brand strong{display:block; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .brand span{display:block; font-size:12px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+
+    .homeBtn{
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:13px;
+      transition:.2s;
+      flex:0 0 auto;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .homeBtn:hover{background:rgba(255,255,255,.07); transform:translateY(-2px);}
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--blue);
+      box-shadow:0 0 0 4px rgba(90,167,255,.12);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top:20px;
+      padding:26px 20px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+    }
+    .kicker{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:7px 11px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:12px;
+    }
+    .kicker b{color:var(--gold)}
+    .hero h1{margin:12px 0 8px; font-size:26px;}
+    .hero p{margin:0; color:var(--muted);}
+
+    /* Layout */
+    .row{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:14px;
+      margin-top:16px;
+    }
+    @media(max-width:920px){
+      .topbar{position:relative; top:auto}
+      .row{grid-template-columns:1fr}
+    }
+
+    /* Cards */
+    .card{
+      padding:20px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+    }
+    .card h2{
+      margin:0 0 12px;
+      color:var(--gold);
+      font-size:16px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      flex-wrap:wrap;
+    }
+    .muted{color:var(--muted); font-size:13px}
+    .chip{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+
+    /* Filter */
+    .controls{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+    .select{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color: var(--ink);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:12px;
+      outline:none;
+    }
+
+    /* List */
+    .list{display:grid; gap:10px; margin-top:6px;}
+    .item{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.02);
+      padding:12px 12px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .left{min-width:0}
+    .title{
+      margin:0 0 5px;
+      font-size:14px;
+      line-height:1.45;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.55;
+    }
+    .meta{
+      margin-top:8px;
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:12px;
+    }
+    .badge{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      border-radius:999px;
+      padding:4px 8px;
+    }
+    .right{
+      display:flex; flex-direction:column; gap:8px; align-items:flex-end;
+      flex:0 0 auto;
+    }
+    .miniBtn{
+      padding:8px 10px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:12px;
+      transition:.2s;
+      cursor:pointer;
+      display:inline-flex; align-items:center; gap:8px;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .miniBtn:hover{background:rgba(255,255,255,.07); transform:translateY(-1px);}
+    .miniBtn .ico{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--blue);
+      box-shadow:0 0 0 4px rgba(90,167,255,.12);
+    }
+
+    /* Buttons */
+    .actions{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    .btn{
+      padding:11px 16px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:14px;
+      transition:.2s;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{transform:translateY(-2px); background:rgba(255,255,255,.08);}
+    .primary{
+      background:linear-gradient(135deg,var(--gold),#a88936);
+      color:#111;
+      font-weight:700;
+      border:none;
+    }
+
+    .toast{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+      min-height:18px;
+    }
+
+    footer{
+      margin-top:16px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      opacity:.95;
+    }
+    footer .hr{margin:12px auto 0; max-width:560px; height:1px; background: var(--line);}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Top -->
+    <div class="topbar">
+      <div class="brand">
+        <div class="mark">IPMA</div>
+        <div style="min-width:0">
+          <strong>International Police Martial Arts Alliance</strong>
+          <span>행사 · 세미나 · Events</span>
+        </div>
       </div>
-      <div class="list-item">
-        <strong>(날짜)</strong> · (국가) · 국제 워크숍 · (주제)
-        <div class="muted">통역 지원 여부: (예/아니오)</div>
-      </div>
+      <a class="homeBtn" href="../index.html"><span class="dot"></span>홈으로</a>
     </div>
-    <p class="muted">※ 확정 일정은 업데이트됩니다.</p>
-  </section>
 
-  <div class="actions">
-    <a class="btn primary" href="../contact/index.html">행사 참가 문의</a>
-    <a class="btn" href="../index.html">홈으로</a>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="kicker"><b>구조</b> >> 교차원리, 교차원리 기반 무도</div>
+      <h1>행사 · 세미나</h1>
+      <p>국내·해외 세미나, 지도자 과정, 협력 행사 소식을 안내합니다.</p>
+    </section>
+
+    <div class="row">
+
+      <!-- Events list -->
+      <section class="card">
+        <h2>
+          진행 예정
+          <span class="chip" id="countText">0건</span>
+        </h2>
+
+        <div class="controls" style="margin-bottom:10px;">
+          <select class="select" id="monthFilter" aria-label="month filter">
+            <option value="ALL">전체 월</option>
+          </select>
+          <select class="select" id="typeFilter" aria-label="type filter">
+            <option value="ALL">전체 유형</option>
+          </select>
+          <span class="muted">※ 확정 일정은 업데이트됩니다.</span>
+        </div>
+
+        <div class="list" id="upcomingList"></div>
+
+        <div style="height:12px"></div>
+
+        <h2>
+          종료/지난 행사
+          <span class="chip" id="pastCountText">0건</span>
+        </h2>
+        <div class="list" id="pastList"></div>
+
+        <div class="actions">
+          <a class="btn primary" href="../contact/index.html">행사 참가 문의</a>
+          <a class="btn" href="../index.html">홈으로</a>
+        </div>
+      </section>
+
+      <!-- Quick contact -->
+      <section class="card">
+        <h2>빠른 문의</h2>
+        <p class="muted" style="margin-top:-4px;">
+          참가/협력/주최 제안은 이메일 또는 오픈채팅으로 연락 주세요.
+        </p>
+
+        <!-- ✅ EDIT ZONE: 연락처만 바꾸면 됩니다 -->
+        <div class="list" style="margin-top:10px;">
+          <div class="item">
+            <div class="left">
+              <p class="title"><strong>이메일</strong></p>
+              <p class="sub" id="emailText">jeonseongkweon@gmail.com</p>
+            </div>
+            <div class="right">
+              <a class="miniBtn" href="mailto:jeonseongkweon@gmail.com?subject=IPMA%20%ED%96%89%EC%82%AC%20%EB%AC%B8%EC%9D%98&body=%ED%96%89%EC%82%AC%20%EB%AA%85%EC%B9%AD%3A%0A%EA%B5%AD%EA%B0%80/%EB%8F%84%EC%8B%9C%3A%0A%EC%86%8C%EC%86%8D(%EB%8F%84%EC%9E%A5/%EA%B8%B0%EA%B4%80)%3A%0A%EB%8C%80%EC%83%81(%EC%A7%80%EB%8F%84%EC%9E%90/%EC%88%98%EB%A0%A8%EC%83%9D)%3A%0A%EC%97%B0%EB%9D%BD%20%EB%B0%A9%EB%B2%95%3A" target="_blank" rel="noopener">
+                <span class="ico"></span>메일
+              </a>
+              <button class="miniBtn" type="button" onclick="copyText('emailText')">
+                <span class="ico"></span>복사
+              </button>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="left">
+              <p class="title"><strong>카카오톡 오픈채팅</strong></p>
+              <p class="sub" id="kakaoText">https://open.kakao.com/o/g60Wr8hi</p>
+            </div>
+            <div class="right">
+              <a class="miniBtn" href="https://open.kakao.com/o/g60Wr8hi" target="_blank" rel="noopener">
+                <span class="ico"></span>열기
+              </a>
+              <button class="miniBtn" type="button" onclick="copyText('kakaoText')">
+                <span class="ico"></span>복사
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- ✅ EDIT ZONE 끝 -->
+
+        <div class="toast" id="toast"></div>
+
+        <div class="actions">
+          <a class="btn primary" href="../contact/index.html">행사 참가 문의</a>
+          <a class="btn" href="../index.html">홈으로</a>
+        </div>
+      </section>
+
+    </div>
+
+    <footer>
+      <div class="hr"></div>
+      <p>© <span id="year"></span> IPMA · International Police Martial Arts Alliance</p>
+    </footer>
+
   </div>
-</main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // =========================================================
+    // ✅ EDIT ZONE: 여기 배열에 행사만 추가하면 됩니다
+    // date: "YYYY-MM-DD" (필수)
+    // title: 행사명
+    // city/country: 지역
+    // type: "세미나" | "워크숍" | "지도자 과정" | "협력 행사" 등
+    // topic: 주제
+    // audience: 대상
+    // notes: 안내/통역/신청 등
+    // link: (선택) 상세 링크(없으면 "")
+    // =========================================================
+    const EVENTS = [
+      {
+        date: "2026-03-15",
+        title: "지도자 세미나",
+        city: "울산",
+        country: "대한민국",
+        type: "세미나",
+        topic: "구조 >> 교차원리 기반 지도법",
+        audience: "지도자/코치",
+        notes: "대상: 지도자 · 신청: 문의 페이지",
+        link: ""
+      },
+      {
+        date: "2026-04-10",
+        title: "국제 워크숍",
+        city: "서울",
+        country: "대한민국",
+        type: "워크숍",
+        topic: "공공안전 훈련 표준화",
+        audience: "지도자/기관",
+        notes: "통역 지원 여부: 예(영어)",
+        link: ""
+      }
+    ];
+    // =========================================================
+    // ✅ EDIT ZONE 끝
+    // =========================================================
+
+    const $upcomingList = document.getElementById("upcomingList");
+    const $pastList = document.getElementById("pastList");
+    const $countText = document.getElementById("countText");
+    const $pastCountText = document.getElementById("pastCountText");
+    const $monthFilter = document.getElementById("monthFilter");
+    const $typeFilter = document.getElementById("typeFilter");
+
+    function escapeHtml(s){
+      return String(s ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function formatDate(iso){
+      // iso: YYYY-MM-DD
+      const [y,m,d] = iso.split("-").map(Number);
+      if(!y || !m || !d) return iso;
+      return `${y}.${String(m).padStart(2,"0")}.${String(d).padStart(2,"0")}`;
+    }
+
+    function monthKey(iso){
+      // YYYY-MM
+      return (iso || "").slice(0,7);
+    }
+
+    function todayIso(){
+      // Use user's timezone is KST in this environment, but JS uses browser local.
+      // We'll treat browser local as user local.
+      const t = new Date();
+      const y = t.getFullYear();
+      const m = String(t.getMonth()+1).padStart(2,"0");
+      const d = String(t.getDate()).padStart(2,"0");
+      return `${y}-${m}-${d}`;
+    }
+
+    function buildFilters(data){
+      const months = Array.from(new Set(data.map(e => monthKey(e.date)).filter(Boolean))).sort();
+      $monthFilter.innerHTML = `<option value="ALL">전체 월</option>` +
+        months.map(k => `<option value="${escapeHtml(k)}">${escapeHtml(k)}</option>`).join("");
+
+      const types = Array.from(new Set(data.map(e => e.type).filter(Boolean))).sort((a,b)=>a.localeCompare(b));
+      $typeFilter.innerHTML = `<option value="ALL">전체 유형</option>` +
+        types.map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join("");
+    }
+
+    function card(e){
+      const dateText = formatDate(e.date);
+      const where = [e.city, e.country].filter(Boolean).join(" · ");
+      const hasLink = !!(e.link && e.link.trim());
+      return `
+        <div class="item" data-month="${escapeHtml(monthKey(e.date))}" data-type="${escapeHtml(e.type||"")}">
+          <div class="left">
+            <p class="title">
+              <strong>${escapeHtml(dateText)}</strong>
+              ${where ? ` · ${escapeHtml(where)}` : ""}
+              · ${escapeHtml(e.title || "행사")}
+              ${e.topic ? ` · ${escapeHtml(e.topic)}` : ""}
+            </p>
+            <p class="sub">${escapeHtml(e.notes || "")}</p>
+            <div class="meta">
+              ${e.type ? `<span class="badge">${escapeHtml(e.type)}</span>` : ""}
+              ${e.audience ? `<span class="badge">대상: ${escapeHtml(e.audience)}</span>` : ""}
+            </div>
+          </div>
+          <div class="right">
+            ${hasLink ? `<a class="miniBtn" href="${escapeHtml(e.link)}" target="_blank" rel="noopener"><span class="ico"></span>상세</a>` : ""}
+            <button class="miniBtn" type="button" data-copy="${escapeHtml(e.title || "행사")} | ${escapeHtml(dateText)} | ${escapeHtml(where)}">
+              <span class="ico"></span>정보복사
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function applyFilter(){
+      const m = $monthFilter.value;
+      const t = $typeFilter.value;
+
+      function filterList(container){
+        const items = container.querySelectorAll(".item");
+        let shown = 0;
+        items.forEach(el=>{
+          const mm = el.getAttribute("data-month") || "";
+          const tt = el.getAttribute("data-type") || "";
+          const ok = (m==="ALL" || mm===m) && (t==="ALL" || tt===t);
+          el.style.display = ok ? "" : "none";
+          if(ok) shown++;
+        });
+        return shown;
+      }
+
+      const upShown = filterList($upcomingList);
+      const pastShown = filterList($pastList);
+
+      $countText.textContent = `${upShown}건`;
+      $pastCountText.textContent = `${pastShown}건`;
+    }
+
+    function render(){
+      const today = todayIso();
+
+      const data = [...EVENTS].filter(e => e && e.date).sort((a,b)=>a.date.localeCompare(b.date));
+      buildFilters(data);
+
+      const upcoming = data.filter(e => e.date >= today);
+      const past = data.filter(e => e.date < today).reverse(); // 최근 지난 행사부터
+
+      $upcomingList.innerHTML = upcoming.length ? upcoming.map(card).join("") :
+        `<div class="muted">예정된 행사가 없습니다. (업데이트 예정)</div>`;
+
+      $pastList.innerHTML = past.length ? past.map(card).join("") :
+        `<div class="muted">등록된 지난 행사가 없습니다.</div>`;
+
+      applyFilter();
+    }
+
+    // Copy helpers
+    function toast(msg){
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(()=>t.textContent="", 2500);
+    }
+    function copyRawText(text){
+      const txt = String(text || "").trim();
+      if(!txt) return toast("복사할 내용이 없습니다.");
+      navigator.clipboard.writeText(txt).then(()=>{
+        toast("복사 완료: " + txt);
+      }).catch(()=>{
+        const ta = document.createElement("textarea");
+        ta.value = txt;
+        document.body.appendChild(ta);
+        ta.select();
+        try{
+          document.execCommand("copy");
+          toast("복사 완료: " + txt);
+        }catch(e){
+          toast("복사 실패: 브라우저 권한을 확인해 주세요.");
+        }
+        ta.remove();
+      });
+    }
+    function copyText(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      copyRawText(el.textContent);
+    }
+
+    document.addEventListener("click", (e)=>{
+      const btn = e.target.closest("button[data-copy]");
+      if(!btn) return;
+      copyRawText(btn.getAttribute("data-copy"));
+    });
+
+    $monthFilter.addEventListener("change", applyFilter);
+    $typeFilter.addEventListener("change", applyFilter);
+
+    render();
+  </script>
+</body>
+</html>
